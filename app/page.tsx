@@ -1,18 +1,38 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Zap, Settings, Shield, Phone, Mail, MapPin, ArrowRight, CheckCircle, Factory, Cpu, Power } from "lucide-react"
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Zap,
+  Settings,
+  Shield,
+  Phone,
+  Mail,
+  MapPin,
+  ArrowRight,
+  CheckCircle,
+  Factory,
+  Cpu,
+  Power,
+} from "lucide-react";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+import Image from "next/image";
+import Head from "next/head";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: "easeOut" },
-}
+};
 
 const staggerContainer = {
   animate: {
@@ -20,26 +40,36 @@ const staggerContainer = {
       staggerChildren: 0.1,
     },
   },
-}
+};
 
 const scaleIn = {
   initial: { opacity: 0, scale: 0.8 },
   animate: { opacity: 1, scale: 1 },
   transition: { duration: 0.5, ease: "easeOut" },
-}
+};
 
 export default function HomePage() {
-  const heroRef = useRef(null)
-  const servicesRef = useRef(null)
-  const aboutRef = useRef(null)
-  const projectsRef = useRef(null)
+  const heroRef = useRef(null);
+  const servicesRef = useRef(null);
+  const aboutRef = useRef(null);
+  const projectsRef = useRef(null);
 
-  const heroInView = useInView(heroRef, { once: true, margin: "-100px" })
-  const servicesInView = useInView(servicesRef, { once: true, margin: "-100px" })
-  const aboutInView = useInView(aboutRef, { once: true, margin: "-100px" })
-  const projectsInView = useInView(projectsRef, { once: true, margin: "-100px" })
+  const heroInView = useInView(heroRef, { once: true, margin: "-100px" });
+  const servicesInView = useInView(servicesRef, {
+    once: true,
+    margin: "-100px",
+  });
+  const aboutInView = useInView(aboutRef, { once: true, margin: "-100px" });
+  const projectsInView = useInView(projectsRef, {
+    once: true,
+    margin: "-100px",
+  });
 
   return (
+    <>
+    <Head>
+      <link rel="icon" href="/favicon.ico"/>
+    </Head>
     <div className="min-h-screen bg-background">
       {/* Header */}
       <motion.header
@@ -50,25 +80,47 @@ export default function HomePage() {
       >
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <Zap className="w-6 h-6 text-primary-foreground" />
+            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+              <Image
+                src="/taqnioon-logo.png"
+                alt="logo"
+                width={100}
+                height={100}
+                className="w-8 h-8 text-primary-foreground"
+              />
             </div>
             <div>
-              <h1 className="font-bold text-lg font-[family-name:var(--font-space-grotesk)]">TAQNIYOON</h1>
-              <p className="text-xs text-muted-foreground">Technical Services</p>
+              <h1 className="font-bold text-lg font-[family-name:var(--font-space-grotesk)]">
+                TAQNIYOON
+              </h1>
+              <p className="text-xs text-muted-foreground">
+                Technical Services
+              </p>
             </div>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
-            <a href="#services" className="text-sm hover:text-primary transition-colors">
+            <a
+              href="#services"
+              className="text-sm hover:text-primary transition-colors"
+            >
               Services
             </a>
-            <a href="#about" className="text-sm hover:text-primary transition-colors">
+            <a
+              href="#about"
+              className="text-sm hover:text-primary transition-colors"
+            >
               About
             </a>
-            <a href="#projects" className="text-sm hover:text-primary transition-colors">
+            <a
+              href="#projects"
+              className="text-sm hover:text-primary transition-colors"
+            >
               Projects
             </a>
-            <a href="#contact" className="text-sm hover:text-primary transition-colors">
+            <a
+              href="#contact"
+              className="text-sm hover:text-primary transition-colors"
+            >
               Contact
             </a>
           </nav>
@@ -96,13 +148,23 @@ export default function HomePage() {
               variants={fadeInUp}
               className="text-4xl lg:text-6xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)]"
             >
-              Empowering Industries with <span className="text-accent">Innovative Electrical Solutions</span>
+              Empowering Industries with{" "}
+              <span className="text-accent">
+                Innovative Electrical Solutions
+              </span>
             </motion.h1>
-            <motion.p variants={fadeInUp} className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Expertise in automation, power systems, and industrial panels. Serving oil & gas, construction, and
-              manufacturing sectors across the UAE and Middle East.
+            <motion.p
+              variants={fadeInUp}
+              className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+            >
+              Expertise in automation, power systems, and industrial panels.
+              Serving oil & gas, construction, and manufacturing sectors across
+              the UAE and Middle East.
             </motion.p>
-            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.div
+              variants={fadeInUp}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
               <Button size="lg" className="bg-accent hover:bg-accent/90">
                 Discover Our Services <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
@@ -138,8 +200,12 @@ export default function HomePage() {
             >
               Our Core Services
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Comprehensive electrical solutions designed for industrial excellence
+            <motion.p
+              variants={fadeInUp}
+              className="text-lg text-muted-foreground max-w-2xl mx-auto"
+            >
+              Comprehensive electrical solutions designed for industrial
+              excellence
             </motion.p>
           </motion.div>
 
@@ -155,10 +221,12 @@ export default function HomePage() {
                   <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
                     <Zap className="w-6 h-6 text-accent" />
                   </div>
-                  <CardTitle className="font-[family-name:var(--font-space-grotesk)]">Industrial Panels</CardTitle>
+                  <CardTitle className="font-[family-name:var(--font-space-grotesk)]">
+                    Industrial Panels
+                  </CardTitle>
                   <CardDescription>
-                    L V panels up to 6000A, MCCs with VFDs, soft starters, and conventional starters for industrial
-                    projects
+                    L V panels up to 6000A, MCCs with VFDs, soft starters, and
+                    conventional starters for industrial projects
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -193,9 +261,12 @@ export default function HomePage() {
                   <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
                     <Settings className="w-6 h-6 text-accent" />
                   </div>
-                  <CardTitle className="font-[family-name:var(--font-space-grotesk)]">Automation & Control</CardTitle>
+                  <CardTitle className="font-[family-name:var(--font-space-grotesk)]">
+                    Automation & Control
+                  </CardTitle>
                   <CardDescription>
-                    PLC-based automation panels and control systems for complex industrial applications
+                    PLC-based automation panels and control systems for complex
+                    industrial applications
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -230,9 +301,12 @@ export default function HomePage() {
                   <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
                     <Shield className="w-6 h-6 text-accent" />
                   </div>
-                  <CardTitle className="font-[family-name:var(--font-space-grotesk)]">Power Systems</CardTitle>
+                  <CardTitle className="font-[family-name:var(--font-space-grotesk)]">
+                    Power Systems
+                  </CardTitle>
                   <CardDescription>
-                    Generator synchronization, ATS panels, and power management solutions up to 3200A
+                    Generator synchronization, ATS panels, and power management
+                    solutions up to 3200A
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -271,7 +345,8 @@ export default function HomePage() {
                     Electrical Retrofitting
                   </CardTitle>
                   <CardDescription>
-                    Modernize existing electrical systems for improved efficiency and compatibility
+                    Modernize existing electrical systems for improved
+                    efficiency and compatibility
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -306,9 +381,12 @@ export default function HomePage() {
                   <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
                     <Cpu className="w-6 h-6 text-accent" />
                   </div>
-                  <CardTitle className="font-[family-name:var(--font-space-grotesk)]">Special Purpose Panels</CardTitle>
+                  <CardTitle className="font-[family-name:var(--font-space-grotesk)]">
+                    Special Purpose Panels
+                  </CardTitle>
                   <CardDescription>
-                    Custom-designed panels for unique industrial applications and specific requirements
+                    Custom-designed panels for unique industrial applications
+                    and specific requirements
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -343,9 +421,12 @@ export default function HomePage() {
                   <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
                     <Power className="w-6 h-6 text-accent" />
                   </div>
-                  <CardTitle className="font-[family-name:var(--font-space-grotesk)]">Capacitor Banks</CardTitle>
+                  <CardTitle className="font-[family-name:var(--font-space-grotesk)]">
+                    Capacitor Banks
+                  </CardTitle>
                   <CardDescription>
-                    Reactive power compensation systems for improved energy efficiency and cost reduction
+                    Reactive power compensation systems for improved energy
+                    efficiency and cost reduction
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -392,23 +473,34 @@ export default function HomePage() {
                 Leading Technical Excellence
               </h2>
               <p className="text-lg text-muted-foreground mb-6">
-                TAQNIYOON Technical Services Co. LLC has established itself as a premier provider of electrical
-                solutions in the UAE and Middle East region. We specialize in manufacturing and supplying high-quality
-                electrical panels and automation systems.
+                TAQNIYOON Technical Services Co. LLC has established itself as a
+                premier provider of electrical solutions in the UAE and Middle
+                East region. We specialize in manufacturing and supplying
+                high-quality electrical panels and automation systems.
               </p>
               <p className="text-muted-foreground mb-8">
-                Our expertise spans across oil & gas, construction, and industrial sectors, delivering reliable
-                solutions that meet international standards and regulations. From generator synchronization to complex
-                automation systems, we provide comprehensive electrical services.
+                Our expertise spans across oil & gas, construction, and
+                industrial sectors, delivering reliable solutions that meet
+                international standards and regulations. From generator
+                synchronization to complex automation systems, we provide
+                comprehensive electrical services.
               </p>
               <div className="grid grid-cols-2 gap-6">
                 <motion.div variants={scaleIn}>
-                  <h3 className="font-semibold text-2xl text-accent mb-2">6000A</h3>
-                  <p className="text-sm text-muted-foreground">Maximum panel capacity</p>
+                  <h3 className="font-semibold text-2xl text-accent mb-2">
+                    6000A
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Maximum panel capacity
+                  </p>
                 </motion.div>
                 <motion.div variants={scaleIn}>
-                  <h3 className="font-semibold text-2xl text-accent mb-2">32+</h3>
-                  <p className="text-sm text-muted-foreground">Generators controlled</p>
+                  <h3 className="font-semibold text-2xl text-accent mb-2">
+                    32+
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Generators controlled
+                  </p>
                 </motion.div>
               </div>
             </motion.div>
@@ -419,8 +511,16 @@ export default function HomePage() {
                 className="rounded-lg shadow-lg"
               />
               <div className="grid grid-cols-2 gap-4 mt-6">
-                <img src="/industrial-electrical-technician-working-on-contro.png" alt="Technician working" className="rounded-lg shadow-md" />
-                <img src="/modern-industrial-facility-with-electrical-infrast.png" alt="Industrial facility" className="rounded-lg shadow-md" />
+                <img
+                  src="/industrial-electrical-technician-working-on-contro.png"
+                  alt="Technician working"
+                  className="rounded-lg shadow-md"
+                />
+                <img
+                  src="/modern-industrial-facility-with-electrical-infrast.png"
+                  alt="Industrial facility"
+                  className="rounded-lg shadow-md"
+                />
               </div>
             </motion.div>
           </motion.div>
@@ -443,8 +543,12 @@ export default function HomePage() {
             >
               Industries We Serve
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Delivering specialized electrical solutions across diverse industrial sectors
+            <motion.p
+              variants={fadeInUp}
+              className="text-lg text-muted-foreground max-w-2xl mx-auto"
+            >
+              Delivering specialized electrical solutions across diverse
+              industrial sectors
             </motion.p>
           </motion.div>
 
@@ -457,34 +561,66 @@ export default function HomePage() {
           >
             <motion.div variants={scaleIn} className="text-center">
               <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <img src="/oil-and-gas-industry-icon.png" alt="Oil & Gas" className="w-10 h-10" />
+                <img
+                  src="/oil-and-gas-industry-icon.png"
+                  alt="Oil & Gas"
+                  className="w-10 h-10"
+                />
               </div>
-              <h3 className="font-semibold mb-2 font-[family-name:var(--font-space-grotesk)]">Oil & Gas</h3>
-              <p className="text-sm text-muted-foreground">Offshore and onshore electrical solutions</p>
+              <h3 className="font-semibold mb-2 font-[family-name:var(--font-space-grotesk)]">
+                Oil & Gas
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Offshore and onshore electrical solutions
+              </p>
             </motion.div>
 
             <motion.div variants={scaleIn} className="text-center">
               <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <img src="/construction-industry-icon.png" alt="Construction" className="w-10 h-10" />
+                <img
+                  src="/construction-industry-icon.png"
+                  alt="Construction"
+                  className="w-10 h-10"
+                />
               </div>
-              <h3 className="font-semibold mb-2 font-[family-name:var(--font-space-grotesk)]">Construction</h3>
-              <p className="text-sm text-muted-foreground">Temporary and permanent power solutions</p>
+              <h3 className="font-semibold mb-2 font-[family-name:var(--font-space-grotesk)]">
+                Construction
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Temporary and permanent power solutions
+              </p>
             </motion.div>
 
             <motion.div variants={scaleIn} className="text-center">
               <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <img src="/manufacturing-industry-icon.png" alt="Manufacturing" className="w-10 h-10" />
+                <img
+                  src="/manufacturing-industry-icon.png"
+                  alt="Manufacturing"
+                  className="w-10 h-10"
+                />
               </div>
-              <h3 className="font-semibold mb-2 font-[family-name:var(--font-space-grotesk)]">Manufacturing</h3>
-              <p className="text-sm text-muted-foreground">Industrial automation and control systems</p>
+              <h3 className="font-semibold mb-2 font-[family-name:var(--font-space-grotesk)]">
+                Manufacturing
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Industrial automation and control systems
+              </p>
             </motion.div>
 
             <motion.div variants={scaleIn} className="text-center">
               <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <img src="/marine-industry-icon.png" alt="Marine" className="w-10 h-10" />
+                <img
+                  src="/marine-industry-icon.png"
+                  alt="Marine"
+                  className="w-10 h-10"
+                />
               </div>
-              <h3 className="font-semibold mb-2 font-[family-name:var(--font-space-grotesk)]">Marine</h3>
-              <p className="text-sm text-muted-foreground">Yacht and marine electrical systems</p>
+              <h3 className="font-semibold mb-2 font-[family-name:var(--font-space-grotesk)]">
+                Marine
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Yacht and marine electrical systems
+              </p>
             </motion.div>
           </motion.div>
         </div>
@@ -506,7 +642,10 @@ export default function HomePage() {
             >
               Recent Projects
             </motion.h2>
-            <motion.p variants={fadeInUp} className="text-lg text-muted-foreground">
+            <motion.p
+              variants={fadeInUp}
+              className="text-lg text-muted-foreground"
+            >
               Trusted by leading companies across various industries
             </motion.p>
           </motion.div>
@@ -530,11 +669,14 @@ export default function HomePage() {
                   <CardTitle className="text-lg font-[family-name:var(--font-space-grotesk)]">
                     SEA SAN Marine Services
                   </CardTitle>
-                  <CardDescription>VFD Panel for Yacht Applications</CardDescription>
+                  <CardDescription>
+                    VFD Panel for Yacht Applications
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    Supply and programming of Schneider 7.5KW, single-phase VFD for marine applications
+                    Supply and programming of Schneider 7.5KW, single-phase VFD
+                    for marine applications
                   </p>
                 </CardContent>
               </Card>
@@ -557,7 +699,8 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    VFD panels for hot water systems and biology unit automation panels
+                    VFD panels for hot water systems and biology unit automation
+                    panels
                   </p>
                 </CardContent>
               </Card>
@@ -580,7 +723,8 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground">
-                    Supply of DB-PMAX systems for major stadium infrastructure project
+                    Supply of DB-PMAX systems for major stadium infrastructure
+                    project
                   </p>
                 </CardContent>
               </Card>
@@ -606,7 +750,10 @@ export default function HomePage() {
               >
                 Get in Touch
               </motion.h2>
-              <motion.p variants={fadeInUp} className="text-lg text-muted-foreground">
+              <motion.p
+                variants={fadeInUp}
+                className="text-lg text-muted-foreground"
+              >
                 Ready to discuss your electrical project requirements?
               </motion.p>
             </motion.div>
@@ -625,7 +772,7 @@ export default function HomePage() {
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <Phone className="w-5 h-5 text-accent" />
-                    <span>+971 XX XXX XXXX</span>
+                    <span>+971 588446578, +971 521083644</span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Mail className="w-5 h-5 text-accent" />
@@ -649,32 +796,49 @@ export default function HomePage() {
               <motion.div variants={fadeInUp}>
                 <Card>
                   <CardHeader>
-                    <CardTitle className="font-[family-name:var(--font-space-grotesk)]">Request a Quote</CardTitle>
-                    <CardDescription>Tell us about your project requirements</CardDescription>
+                    <CardTitle className="font-[family-name:var(--font-space-grotesk)]">
+                      Request a Quote
+                    </CardTitle>
+                    <CardDescription>
+                      Tell us about your project requirements
+                    </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="text-sm font-medium mb-2 block">Name</label>
+                        <label className="text-sm font-medium mb-2 block">
+                          Name
+                        </label>
                         <input className="w-full px-3 py-2 border border-input rounded-md bg-background" />
                       </div>
                       <div>
-                        <label className="text-sm font-medium mb-2 block">Company</label>
+                        <label className="text-sm font-medium mb-2 block">
+                          Company
+                        </label>
                         <input className="w-full px-3 py-2 border border-input rounded-md bg-background" />
                       </div>
                     </div>
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Email</label>
-                      <input type="email" className="w-full px-3 py-2 border border-input rounded-md bg-background" />
+                      <label className="text-sm font-medium mb-2 block">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        className="w-full px-3 py-2 border border-input rounded-md bg-background"
+                      />
                     </div>
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Project Details</label>
+                      <label className="text-sm font-medium mb-2 block">
+                        Project Details
+                      </label>
                       <textarea
                         rows={4}
                         className="w-full px-3 py-2 border border-input rounded-md bg-background resize-none"
                       ></textarea>
                     </div>
-                    <Button className="w-full bg-accent hover:bg-accent/90">Send Message</Button>
+                    <Button className="w-full bg-accent hover:bg-accent/90">
+                      Send Message
+                    </Button>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -696,15 +860,25 @@ export default function HomePage() {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
-                  <Zap className="w-5 h-5 text-accent-foreground" />
+                  {/* <Zap className="w-5 h-5 text-accent-foreground" /> */}
+                  <Image
+                    src="/taqnioon-logo.png"
+                    alt="logo"
+                    width={100}
+                    height={100}
+                    className="w-8 h-8 text-primary-foreground"
+                  />
                 </div>
                 <div>
-                  <h3 className="font-bold font-[family-name:var(--font-space-grotesk)]">TAQNIYOON</h3>
+                  <h3 className="font-bold font-[family-name:var(--font-space-grotesk)]">
+                    TAQNIYOON
+                  </h3>
                   <p className="text-xs opacity-80">Technical Services</p>
                 </div>
               </div>
               <p className="text-sm opacity-80">
-                Leading provider of industrial electrical solutions in the UAE and Middle East.
+                Leading provider of industrial electrical solutions in the UAE
+                and Middle East.
               </p>
             </div>
 
@@ -742,10 +916,14 @@ export default function HomePage() {
           </div>
 
           <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
-            <p className="text-sm opacity-80">© 2024 TAQNIYOON Technical Services Co. LLC. All rights reserved.</p>
+            <p className="text-sm opacity-80">
+              © 2024 TAQNIYOON Technical Services Co. LLC. All rights reserved.
+            </p>
           </div>
         </div>
       </motion.footer>
     </div>
-  )
+    </>
+
+  );
 }

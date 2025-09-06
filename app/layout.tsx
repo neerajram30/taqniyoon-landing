@@ -19,7 +19,9 @@ export const metadata: Metadata = {
   title: "TAQNIYOON Technical Services - Industrial Electrical Solutions",
   description:
     "Leading provider of industrial electrical panels, automation systems, and power solutions in the UAE. Serving oil & gas, construction, and industrial sectors.",
-  generator: "v0.app",
+  icons:{
+    icon:'/favicon.ico'
+  }  
 }
 
 export default function RootLayout({

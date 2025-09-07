@@ -910,7 +910,6 @@ export default function HomePage() {
                 <li>About Us</li>
                 <li>Projects</li>
                 <li>Contact</li>
-                <li>Careers</li>
               </ul>
             </div>
           </div>

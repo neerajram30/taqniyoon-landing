@@ -253,8 +253,8 @@ export default function HomePage() {
         </section>
 
         {/* Services Section */}
-        <section id="services" className="py-20 bg-[#F5F9FF] px-8">
-          <div className="container mx-auto px-10">
+        <section id="services" className="py-20 bg-[#F5F9FF] md:px-16 px-6">
+          <div className="container mx-auto">
             <motion.div
               ref={servicesRef}
               initial="initial"
@@ -528,7 +528,7 @@ export default function HomePage() {
 
         {/* About Section */}
         <section id="about" className="py-20">
-          <div className="container mx-auto pl-20 pr-10">
+          <div className="container mx-auto md:pl-20 pl-6 md:pr-10 pr-6">
             <motion.div
               ref={aboutRef}
               initial="initial"
@@ -697,7 +697,7 @@ export default function HomePage() {
 
         {/* Projects Section */}
         <section id="projects" className="py-20">
-          <div className="container mx-auto px-20">
+          <div className="container mx-auto md:px-20 px-6">
             <motion.div
               ref={projectsRef}
               initial="initial"
@@ -804,7 +804,7 @@ export default function HomePage() {
 
         {/* Contact Section */}
         <section id="contact" className="py-20 bg-[#F5F9FF]">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-6">
             <div className="max-w-4xl mx-auto">
               <motion.div
                 initial="initial"

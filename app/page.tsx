@@ -21,14 +21,12 @@ import {
   Factory,
   Cpu,
   Power,
-  ChevronDown,
 } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Head from "next/head";
-import Link from "next/link";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -51,6 +49,8 @@ const scaleIn = {
 };
 
 export default function HomePage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const heroRef = useRef(null);
   const heroSectionRef = useRef(null);
 
@@ -86,194 +86,328 @@ export default function HomePage() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="border-b bg-white backdrop-blur-sm sticky top-0 z-50"
+          className="border-b border-border/50 bg-white/95 backdrop-blur-md sticky top-0 z-50 shadow-sm"
         >
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+          <div className="container mx-auto px-6 py-5 flex items-center justify-between">
+            <motion.div
+              className="flex items-center space-x-3"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg border border-accent/20">
                 <Image
                   src="/taqnioon-logo.png"
-                  alt="logo"
+                  alt="TAQNIYOON Logo"
                   width={100}
                   height={100}
-                  className="w-8 h-8 text-primary-foreground"
+                  className="w-10 h-10 object-contain"
                 />
               </div>
               <div>
-                <h1 className="font-bold text-lg font-[family-name:var(--font-space-grotesk)]">
+                <h1 className="font-bold text-xl font-[family-name:var(--font-space-grotesk)] text-foreground">
                   TAQNIYOON
                 </h1>
-                <p className="text-xs text-muted-foreground">
-                  Technical Services
+                <p className="text-xs text-muted-foreground font-medium tracking-wide">
+                  Technical Services Co. LLC
                 </p>
               </div>
-            </div>
-            <nav className="hidden md:flex items-center space-x-6">
-              <a
-                href="#services"
-                className="text-sm hover:text-primary transition-colors"
-              >
-                Services
-              </a>
-              <a
-                href="#about"
-                className="text-sm hover:text-primary transition-colors"
-              >
-                About
-              </a>
-              <a
-                href="#projects"
-                className="text-sm hover:text-primary transition-colors"
-              >
-                Projects
-              </a>
-              <a
-                href="#contact"
-                className="text-sm hover:text-primary transition-colors"
-              >
-                Contact
-              </a>
+            </motion.div>
+
+            <nav className="hidden lg:flex items-center space-x-8">
+              {[
+                { href: "#services", label: "Services" },
+                { href: "#about", label: "About" },
+                { href: "#projects", label: "Projects" },
+                { href: "#contact", label: "Contact" }
+              ].map((item) => (
+                <motion.a
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm font-medium text-foreground/80 hover:text-accent transition-all duration-300 relative group"
+                  whileHover={{ y: -1 }}
+                >
+                  {item.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+                </motion.a>
+              ))}
             </nav>
-            <Button className="bg-accent hover:bg-accent/90">
-              Get a Quote
-            </Button>
+
+            <div className="flex items-center space-x-4">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <a href="#contact">
+                  <Button className="bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-white font-semibold px-6 py-2.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                    Get a Quote
+                    <ArrowRight className="ml-2 w-4 h-4" />
+                  </Button>
+                </a>
+              </motion.div>
+
+              {/* Mobile Menu Button */}
+              <button
+                className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
+
+          {/* Mobile Menu Overlay */}
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-b border-border/50 shadow-lg z-40"
+            >
+              <div className="container mx-auto px-6 py-6">
+                <nav className="flex flex-col space-y-4">
+                  {[
+                    { href: "#services", label: "Services" },
+                    { href: "#about", label: "About" },
+                    { href: "#projects", label: "Projects" },
+                    { href: "#contact", label: "Contact" }
+                  ].map((item) => (
+                    <motion.a
+                      key={item.href}
+                      href={item.href}
+                      className="text-lg font-medium text-foreground/80 hover:text-accent transition-colors py-2 border-b border-border/20 last:border-b-0"
+                      onClick={() => setMobileMenuOpen(false)}
+                      whileHover={{ x: 10 }}
+                    >
+                      {item.label}
+                    </motion.a>
+                  ))}
+                  <motion.div className="pt-4">
+                    <a href="#contact" onClick={() => setMobileMenuOpen(false)}>
+                      <Button className="w-full bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-white font-semibold">
+                        Get a Quote
+                        <ArrowRight className="ml-2 w-4 h-4" />
+                      </Button>
+                    </a>
+                  </motion.div>
+                </nav>
+              </div>
+            </motion.div>
+          )}
         </motion.header>
 
         {/* Hero Section */}
         <section
           ref={heroSectionRef}
-          className="relative py-20 lg:py-32 overflow-hidden h-screen"
+          className="relative py-20 lg:py-32 overflow-hidden min-h-screen flex items-center"
         >
-          <motion.img
-            src="/images/hero-industrial-dark-pro.jpg"
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 z-10 h-full w-full object-cover"
+          {/* Background Image with Parallax */}
+          <motion.div
+            className="absolute inset-0 z-10"
             style={{ y: heroParallaxY }}
-          />
-          {/* Strengthen dark overlay gradient for better contrast */}
-          <div className="absolute inset-0 z-20 bg-gradient-to-br from-black/80 via-black/60 to-black/40" />
-          <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+          >
+            <img
+              src="/images/hero-industrial-dark-pro.jpg"
+              alt=""
+              aria-hidden="true"
+              className="h-full w-full object-cover scale-110"
+            />
+          </motion.div>
 
-          <div className="container mx-auto px-4 relative z-30">
-            {/* Add glass panel behind hero copy and ensure high-contrast text */}
+          {/* Enhanced Overlay Gradients */}
+          <div className="absolute inset-0 z-20 bg-gradient-to-br from-black/85 via-black/70 to-black/50" />
+          <div className="absolute inset-0 z-20 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
+
+          {/* Geometric Accent Elements */}
+          <div className="absolute top-20 right-20 z-25 w-32 h-32 border border-accent/30 rotate-45 hidden lg:block"></div>
+          <div className="absolute bottom-32 left-20 z-25 w-24 h-24 bg-accent/10 rotate-12 hidden lg:block"></div>
+
+          <div className="container mx-auto px-6 relative z-30 w-full">
             <motion.div
               ref={heroRef}
               initial="initial"
               animate={heroInView ? "animate" : "initial"}
               variants={staggerContainer}
-              className="max-w-5xl mx-auto lg:mx-0 text-center lg:text-left"
+              className="max-w-6xl mx-auto lg:mx-0 text-center lg:text-left"
             >
-              <div className="inline-block px-6 py-6 md:px-8 md:py-8 text-primary-foreground">
-                <motion.div variants={fadeInUp}>
-                  {/* Ensure badge readable on dark bg */}
-                  {/* <Badge
-                    variant="secondary"
-                    className="mb-6 bg-background/30 text-primary-foreground border border-border/30"
-                  >
-                    Trusted by Leading Industries
-                  </Badge> */}
-                </motion.div>
-
-                <motion.h1
-                  variants={fadeInUp}
-                  className="text-4xl lg:text-6xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)] text-primary-foreground"
+              {/* Professional Badge */}
+              <motion.div variants={fadeInUp} className="mb-8">
+                <Badge
+                  variant="secondary"
+                  className="mb-6 bg-white/10 text-white border border-white/20 backdrop-blur-sm px-4 py-2 text-sm font-medium"
                 >
-                  Empowering Industries with{" "}
-                  <span className="text-accent">
-                    Innovative Electrical Solutions
-                  </span>
-                </motion.h1>
+                  ⚡ Trusted by Leading Industries Across the Middle East
+                </Badge>
+              </motion.div>
 
-                {/* Use high-contrast text with slight opacity for hierarchy */}
-                <motion.p
-                  variants={fadeInUp}
-                  className="text-xl mb-8 max-w-2xl mx-auto lg:mx-0 text-primary-foreground opacity-90"
-                >
-                  Expertise in automation, power systems, and industrial panels.
-                  Serving oil & gas, construction, and manufacturing sectors
-                  across the UAE and Middle East.
-                </motion.p>
+              {/* Enhanced Typography Hierarchy */}
+              <motion.h1
+                variants={fadeInUp}
+                className="text-5xl lg:text-7xl xl:text-8xl font-bold mb-8 font-[family-name:var(--font-space-grotesk)] text-white leading-tight"
+              >
+                Empowering Industries with{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent to-accent/80">
+                  Innovative Electrical Solutions
+                </span>
+              </motion.h1>
 
+              {/* Enhanced Description */}
+              <motion.p
+                variants={fadeInUp}
+                className="text-xl lg:text-2xl mb-12 max-w-3xl mx-auto lg:mx-0 text-white/90 leading-relaxed font-light"
+              >
+                Expertise in automation, power systems, and industrial panels.
+                Serving oil & gas, construction, and manufacturing sectors
+                across the UAE and Middle East with cutting-edge solutions.
+              </motion.p>
+
+              {/* Enhanced Call-to-Action Buttons */}
+              <motion.div
+                variants={fadeInUp}
+                className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start items-center"
+              >
                 <motion.div
-                  variants={fadeInUp}
-                  className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
+                  <a href="#services">
                     <Button
                       size="lg"
-                      className="bg-accent hover:bg-accent/90 text-accent-foreground"
+                      className="bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-white font-semibold px-8 py-4 text-lg rounded-xl shadow-2xl hover:shadow-accent/25 transition-all duration-300"
                     >
-                      Discover Our Services{" "}
-                      <ArrowRight className="ml-2 w-4 h-4" />
+                      Discover Our Services
+                      <ArrowRight className="ml-3 w-5 h-5" />
                     </Button>
-                  </motion.div>
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    {/* Ensure outline button readable on dark background */}
+                  </a>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <a href="#projects">
                     <Button
                       size="lg"
                       variant="outline"
-                      className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 bg-transparent"
+                      className="border-2 border-white/30 text-white hover:bg-white/10 bg-white/5 backdrop-blur-sm font-semibold px-8 py-4 text-lg rounded-xl transition-all duration-300"
                     >
                       View Projects
+                      <ArrowRight className="ml-3 w-5 h-5" />
                     </Button>
-                  </motion.div>
+                  </a>
                 </motion.div>
-              </div>
+              </motion.div>
+
+              {/* Key Statistics */}
+              <motion.div
+                variants={fadeInUp}
+                className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto lg:mx-0"
+              >
+                {[
+                  { number: "6000A", label: "Max Panel Capacity" },
+                  { number: "32+", label: "Generators Controlled" },
+                  { number: "100+", label: "Projects Completed" },
+                  { number: "15+", label: "Years Experience" }
+                ].map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    variants={scaleIn}
+                    className="text-center bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10"
+                  >
+                    <h3 className="text-2xl lg:text-3xl font-bold text-accent mb-1">
+                      {stat.number}
+                    </h3>
+                    <p className="text-sm text-white/80 font-medium">
+                      {stat.label}
+                    </p>
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
           </div>
 
-          {/* Scroll cue with improved contrast */}
-          {/* <a
+          {/* Enhanced Scroll Indicator */}
+          <motion.a
             href="#services"
             aria-label="Scroll to services"
-            className="absolute left-1/2 -translate-x-1/2 bottom-6 z-30"
+            className="absolute left-1/2 -translate-x-1/2 bottom-8 z-30"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.6 }}
           >
             <motion.div
-              initial={{ opacity: 0.9, y: 0 }}
-              animate={{ opacity: [0.8, 1, 0.8], y: [0, 6, 0] }}
+              animate={{ y: [0, 8, 0] }}
               transition={{
                 duration: 2,
                 repeat: Number.POSITIVE_INFINITY,
                 ease: "easeInOut",
               }}
-              className="flex flex-col items-center text-primary-foreground"
+              className="flex flex-col items-center text-white/80 hover:text-white transition-colors cursor-pointer"
             >
-              <span className="text-xs mb-1 opacity-80">Scroll</span>
-              <ChevronDown className="w-5 h-5 opacity-80" />
+              <span className="text-sm mb-2 font-medium">Scroll to explore</span>
+              <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+                <motion.div
+                  animate={{ y: [0, 12, 0] }}
+                  transition={{
+                    duration: 2,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                  }}
+                  className="w-1 h-3 bg-white/60 rounded-full mt-2"
+                />
+              </div>
             </motion.div>
-          </a> */}
+          </motion.a>
         </section>
 
         {/* Services Section */}
-        <section id="services" className="py-20 bg-[#F5F9FF] md:px-16 px-6">
-          <div className="container mx-auto">
+        <section id="services" className="py-24 bg-gradient-to-br from-[#F8FAFF] to-[#F0F6FF] relative overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-20 left-20 w-32 h-32 border border-accent rotate-45"></div>
+            <div className="absolute bottom-20 right-20 w-24 h-24 bg-accent/20 rotate-12"></div>
+            <div className="absolute top-1/2 left-1/4 w-16 h-16 border border-accent/30 rotate-12"></div>
+          </div>
+
+          <div className="container mx-auto px-6 relative z-10">
             <motion.div
               ref={servicesRef}
               initial="initial"
               animate={servicesInView ? "animate" : "initial"}
               variants={staggerContainer}
-              className="text-center mb-16"
+              className="text-center mb-20"
             >
+              <motion.div variants={fadeInUp} className="mb-6">
+                <Badge
+                  variant="secondary"
+                  className="bg-accent/10 text-accent border border-accent/20 px-4 py-2 text-sm font-medium"
+                >
+                  ⚡ Professional Services
+                </Badge>
+              </motion.div>
+
               <motion.h2
                 variants={fadeInUp}
-                className="text-3xl lg:text-4xl font-bold mb-4 font-[family-name:var(--font-space-grotesk)]"
+                className="text-4xl lg:text-6xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)] text-foreground"
               >
                 Our Core Services
               </motion.h2>
+
               <motion.p
                 variants={fadeInUp}
-                className="text-lg text-muted-foreground max-w-2xl mx-auto"
+                className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
               >
-                Comprehensive electrical solutions designed for industrial
-                excellence
+                Comprehensive electrical solutions designed for industrial excellence,
+                delivering cutting-edge technology and unmatched reliability
               </motion.p>
             </motion.div>
 
@@ -284,240 +418,301 @@ export default function HomePage() {
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
               <motion.div variants={scaleIn}>
-                <Card className="group hover:shadow-lg transition-all duration-300 h-full">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-                      <Zap className="w-6 h-6 text-accent" />
+                <Card className="group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full border-0 bg-white/80 backdrop-blur-sm hover:-translate-y-2 relative overflow-hidden">
+                  {/* Gradient Border Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  <CardHeader className="relative z-10 pb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <Zap className="w-8 h-8 text-white" />
                     </div>
-                    <CardTitle className="font-[family-name:var(--font-space-grotesk)]">
+                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300">
                       Industrial Panels
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-base leading-relaxed">
                       L V panels up to 6000A, MCCs with VFDs, soft starters, and
                       conventional starters for industrial projects
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className="mb-4">
+
+                  <CardContent className="relative z-10">
+                    <div className="mb-6 overflow-hidden rounded-xl">
                       <img
                         src="/industrial-electrical-control-panel-with-switches-.png"
                         alt="Industrial control panel"
-                        className="w-full h-32 object-cover rounded-md"
+                        className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        Switchgear panels up to 6000A
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        Motor Control Centers (MCCs)
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        VFDs and soft starters
-                      </li>
+
+                    <ul className="space-y-3 text-sm">
+                      {[
+                        "Switchgear panels up to 6000A",
+                        "Motor Control Centers (MCCs)",
+                        "VFDs and soft starters"
+                      ].map((item, index) => (
+                        <motion.li
+                          key={index}
+                          className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                        >
+                          <div className="w-5 h-5 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors duration-300">
+                            <CheckCircle className="w-3 h-3 text-accent" />
+                          </div>
+                          {item}
+                        </motion.li>
+                      ))}
                     </ul>
                   </CardContent>
                 </Card>
               </motion.div>
 
               <motion.div variants={scaleIn}>
-                <Card className="group hover:shadow-lg transition-all duration-300 h-full">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-                      <Settings className="w-6 h-6 text-accent" />
+                <Card className="group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full border-0 bg-white/80 backdrop-blur-sm hover:-translate-y-2 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  <CardHeader className="relative z-10 pb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <Settings className="w-8 h-8 text-white" />
                     </div>
-                    <CardTitle className="font-[family-name:var(--font-space-grotesk)]">
+                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300">
                       Automation & Control
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-base leading-relaxed">
                       PLC-based automation panels and control systems for
                       complex industrial applications
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className="mb-4">
+
+                  <CardContent className="relative z-10">
+                    <div className="mb-6 overflow-hidden rounded-xl">
                       <img
                         src="/plc-automation-control-system-with-hmi-display-and.png"
                         alt="PLC automation system"
-                        className="w-full h-32 object-cover rounded-md"
+                        className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        PLC-based automation
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        Control and automation panels
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        Custom control schemes
-                      </li>
+
+                    <ul className="space-y-3 text-sm">
+                      {[
+                        "PLC-based automation",
+                        "Control and automation panels",
+                        "Custom control schemes"
+                      ].map((item, index) => (
+                        <motion.li
+                          key={index}
+                          className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                        >
+                          <div className="w-5 h-5 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors duration-300">
+                            <CheckCircle className="w-3 h-3 text-accent" />
+                          </div>
+                          {item}
+                        </motion.li>
+                      ))}
                     </ul>
                   </CardContent>
                 </Card>
               </motion.div>
 
               <motion.div variants={scaleIn}>
-                <Card className="group hover:shadow-lg transition-all duration-300 h-full">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-                      <Shield className="w-6 h-6 text-accent" />
+                <Card className="group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full border-0 bg-white/80 backdrop-blur-sm hover:-translate-y-2 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  <CardHeader className="relative z-10 pb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <Shield className="w-8 h-8 text-white" />
                     </div>
-                    <CardTitle className="font-[family-name:var(--font-space-grotesk)]">
+                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300">
                       Power Systems
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-base leading-relaxed">
                       Generator synchronization, ATS panels, and power
                       management solutions up to 3200A
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className="mb-4">
+
+                  <CardContent className="relative z-10">
+                    <div className="mb-6 overflow-hidden rounded-xl">
                       <img
                         src="/industrial-generator-synchronization-panel-with-po.png"
                         alt="Power management system"
-                        className="w-full h-32 object-cover rounded-md"
+                        className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        Generator synchronization
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        ATS panels up to 3200A
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        Capacitor banks
-                      </li>
+
+                    <ul className="space-y-3 text-sm">
+                      {[
+                        "Generator synchronization",
+                        "ATS panels up to 3200A",
+                        "Capacitor banks"
+                      ].map((item, index) => (
+                        <motion.li
+                          key={index}
+                          className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                        >
+                          <div className="w-5 h-5 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors duration-300">
+                            <CheckCircle className="w-3 h-3 text-accent" />
+                          </div>
+                          {item}
+                        </motion.li>
+                      ))}
                     </ul>
                   </CardContent>
                 </Card>
               </motion.div>
 
               <motion.div variants={scaleIn}>
-                <Card className="group hover:shadow-lg transition-all duration-300 h-full">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-                      <Factory className="w-6 h-6 text-accent" />
+                <Card className="group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full border-0 bg-white/80 backdrop-blur-sm hover:-translate-y-2 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  <CardHeader className="relative z-10 pb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <Factory className="w-8 h-8 text-white" />
                     </div>
-                    <CardTitle className="font-[family-name:var(--font-space-grotesk)]">
+                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300">
                       Electrical Retrofitting
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-base leading-relaxed">
                       Modernize existing electrical systems for improved
                       efficiency and compatibility
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className="mb-4">
+
+                  <CardContent className="relative z-10">
+                    <div className="mb-6 overflow-hidden rounded-xl">
                       <img
                         src="/electrical-retrofitting-upgrade-of-industrial-faci.png"
                         alt="Electrical retrofitting"
-                        className="w-full h-32 object-cover rounded-md"
+                        className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        System modernization
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        Energy efficiency upgrades
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        Safety compliance
-                      </li>
+
+                    <ul className="space-y-3 text-sm">
+                      {[
+                        "System modernization",
+                        "Energy efficiency upgrades",
+                        "Safety compliance"
+                      ].map((item, index) => (
+                        <motion.li
+                          key={index}
+                          className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                        >
+                          <div className="w-5 h-5 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors duration-300">
+                            <CheckCircle className="w-3 h-3 text-accent" />
+                          </div>
+                          {item}
+                        </motion.li>
+                      ))}
                     </ul>
                   </CardContent>
                 </Card>
               </motion.div>
 
               <motion.div variants={scaleIn}>
-                <Card className="group hover:shadow-lg transition-all duration-300 h-full">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-                      <Cpu className="w-6 h-6 text-accent" />
+                <Card className="group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full border-0 bg-white/80 backdrop-blur-sm hover:-translate-y-2 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  <CardHeader className="relative z-10 pb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <Cpu className="w-8 h-8 text-white" />
                     </div>
-                    <CardTitle className="font-[family-name:var(--font-space-grotesk)]">
+                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300">
                       Special Purpose Panels
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-base leading-relaxed">
                       Custom-designed panels for unique industrial applications
                       and specific requirements
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className="mb-4">
+
+                  <CardContent className="relative z-10">
+                    <div className="mb-6 overflow-hidden rounded-xl">
                       <img
                         src="/custom-special-purpose-electrical-control-panel-wi.png"
                         alt="Special purpose panel"
-                        className="w-full h-32 object-cover rounded-md"
+                        className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        Custom design solutions
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        Specialized applications
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        Unique requirements
-                      </li>
+
+                    <ul className="space-y-3 text-sm">
+                      {[
+                        "Custom design solutions",
+                        "Specialized applications",
+                        "Unique requirements"
+                      ].map((item, index) => (
+                        <motion.li
+                          key={index}
+                          className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                        >
+                          <div className="w-5 h-5 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors duration-300">
+                            <CheckCircle className="w-3 h-3 text-accent" />
+                          </div>
+                          {item}
+                        </motion.li>
+                      ))}
                     </ul>
                   </CardContent>
                 </Card>
               </motion.div>
 
               <motion.div variants={scaleIn}>
-                <Card className="group hover:shadow-lg transition-all duration-300 h-full">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
-                      <Power className="w-6 h-6 text-accent" />
+                <Card className="group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full border-0 bg-white/80 backdrop-blur-sm hover:-translate-y-2 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  <CardHeader className="relative z-10 pb-4">
+                    <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <Power className="w-8 h-8 text-white" />
                     </div>
-                    <CardTitle className="font-[family-name:var(--font-space-grotesk)]">
+                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300">
                       Capacitor Banks
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-base leading-relaxed">
                       Reactive power compensation systems for improved energy
                       efficiency and cost reduction
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className="mb-4">
+
+                  <CardContent className="relative z-10">
+                    <div className="mb-6 overflow-hidden rounded-xl">
                       <img
                         src="/industrial-capacitor-bank-for-power-factor-correct.png"
                         alt="Capacitor bank system"
-                        className="w-full h-32 object-cover rounded-md"
+                        className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        Power factor correction
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        Energy cost reduction
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle className="w-4 h-4 text-accent" />
-                        System efficiency
-                      </li>
+
+                    <ul className="space-y-3 text-sm">
+                      {[
+                        "Power factor correction",
+                        "Energy cost reduction",
+                        "System efficiency"
+                      ].map((item, index) => (
+                        <motion.li
+                          key={index}
+                          className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                        >
+                          <div className="w-5 h-5 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors duration-300">
+                            <CheckCircle className="w-3 h-3 text-accent" />
+                          </div>
+                          {item}
+                        </motion.li>
+                      ))}
                     </ul>
                   </CardContent>
                 </Card>
@@ -527,97 +722,163 @@ export default function HomePage() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-20">
-          <div className="container mx-auto md:pl-20 pl-6 md:pr-10 pr-6">
+        <section id="about" className="py-24 bg-white relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-32 right-32 w-40 h-40 border border-accent rotate-45"></div>
+            <div className="absolute bottom-32 left-32 w-32 h-32 bg-accent/20 rotate-12"></div>
+          </div>
+
+          <div className="container mx-auto px-6 relative z-10">
             <motion.div
               ref={aboutRef}
               initial="initial"
               animate={aboutInView ? "animate" : "initial"}
               variants={staggerContainer}
-              className="grid lg:grid-cols-2 gap-12 items-center"
+              className="grid lg:grid-cols-2 gap-16 items-center"
             >
-              <motion.div variants={fadeInUp}>
-                <h2 className="text-3xl lg:text-4xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)]">
-                  Leading Technical Excellence
-                </h2>
-                <p className="text-lg text-muted-foreground mb-6">
-                  TAQNIYOON Technical Services Co. LLC has established itself as
-                  a premier provider of electrical solutions in the UAE and
-                  Middle East region. We specialize in manufacturing and
-                  supplying high-quality electrical panels and automation
-                  systems.
-                </p>
-                <p className="text-muted-foreground mb-8">
-                  Our expertise spans across oil & gas, construction, and
-                  industrial sectors, delivering reliable solutions that meet
-                  international standards and regulations. From generator
-                  synchronization to complex automation systems, we provide
-                  comprehensive electrical services.
-                </p>
-                <div className="grid grid-cols-2 gap-6">
-                  <motion.div variants={scaleIn}>
-                    <h3 className="font-semibold text-2xl text-accent mb-2">
-                      6000A
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Maximum panel capacity
-                    </p>
+              <motion.div variants={fadeInUp} className="space-y-8">
+                <div>
+                  <motion.div variants={fadeInUp} className="mb-6">
+                    <Badge
+                      variant="secondary"
+                      className="bg-accent/10 text-accent border border-accent/20 px-4 py-2 text-sm font-medium mb-6"
+                    >
+                      🏆 Industry Leadership
+                    </Badge>
                   </motion.div>
-                  <motion.div variants={scaleIn}>
-                    <h3 className="font-semibold text-2xl text-accent mb-2">
-                      32+
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Generators controlled
-                    </p>
-                  </motion.div>
+
+                  <h2 className="text-4xl lg:text-6xl font-bold mb-8 font-[family-name:var(--font-space-grotesk)] text-foreground leading-tight">
+                    Leading Technical Excellence
+                  </h2>
+                </div>
+
+                <div className="space-y-6">
+                  <p className="text-xl text-muted-foreground leading-relaxed">
+                    TAQNIYOON Technical Services Co. LLC has established itself as
+                    a premier provider of electrical solutions in the UAE and
+                    Middle East region. We specialize in manufacturing and
+                    supplying high-quality electrical panels and automation
+                    systems.
+                  </p>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    Our expertise spans across oil & gas, construction, and
+                    industrial sectors, delivering reliable solutions that meet
+                    international standards and regulations. From generator
+                    synchronization to complex automation systems, we provide
+                    comprehensive electrical services.
+                  </p>
+                </div>
+
+                {/* Enhanced Statistics */}
+                <div className="grid grid-cols-2 gap-8 pt-8">
+                  {[
+                    { number: "6000A", label: "Maximum panel capacity", icon: "⚡" },
+                    { number: "32+", label: "Generators controlled", icon: "🔧" },
+                    { number: "100+", label: "Projects completed", icon: "🏗️" },
+                    { number: "15+", label: "Years of experience", icon: "📅" }
+                  ].map((stat, index) => (
+                    <motion.div
+                      key={index}
+                      variants={scaleIn}
+                      className="bg-gradient-to-br from-accent/5 to-accent/10 p-6 rounded-2xl border border-accent/10 hover:border-accent/20 transition-all duration-300 group"
+                    >
+                      <div className="text-2xl mb-2">{stat.icon}</div>
+                      <h3 className="font-bold text-3xl text-accent mb-2 group-hover:scale-105 transition-transform duration-300">
+                        {stat.number}
+                      </h3>
+                      <p className="text-sm text-muted-foreground font-medium">
+                        {stat.label}
+                      </p>
+                    </motion.div>
+                  ))}
                 </div>
               </motion.div>
+
               <motion.div variants={fadeInUp} className="relative">
-                <img
-                  src="/industrial-electrical-panel-control-room-with-mode.png"
-                  alt="Industrial electrical control room"
-                  className="rounded-lg shadow-lg"
-                />
-                <div className="grid grid-cols-2 gap-4 mt-6">
+                {/* Main Image with Enhanced Styling */}
+                <div className="relative overflow-hidden rounded-3xl shadow-2xl group">
                   <img
-                    src="/industrial-electrical-technician-working-on-contro.png"
-                    alt="Technician working"
-                    className="rounded-lg shadow-md"
+                    src="/industrial-electrical-panel-control-room-with-mode.png"
+                    alt="Industrial electrical control room"
+                    className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <img
-                    src="/modern-industrial-facility-with-electrical-infrast.png"
-                    alt="Industrial facility"
-                    className="rounded-lg shadow-md"
-                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>
+
+                {/* Secondary Images Grid */}
+                <div className="grid grid-cols-2 gap-6 mt-8">
+                  <div className="relative overflow-hidden rounded-2xl shadow-xl group">
+                    <img
+                      src="/industrial-electrical-technician-working-on-contro.png"
+                      alt="Technician working"
+                      className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                  </div>
+                  <div className="relative overflow-hidden rounded-2xl shadow-xl group">
+                    <img
+                      src="/modern-industrial-facility-with-electrical-infrast.png"
+                      alt="Industrial facility"
+                      className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                  </div>
+                </div>
+
+                {/* Floating Badge */}
+                <motion.div
+                  className="absolute -top-4 -right-4 bg-accent text-white px-6 py-3 rounded-2xl shadow-lg font-semibold"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                >
+                  ISO Certified
+                </motion.div>
               </motion.div>
             </motion.div>
           </div>
         </section>
 
         {/* Industries Section */}
-        <section className="py-20 bg-[#F5F9FF]">
-          <div className="container mx-auto px-4">
+        <section className="py-24 bg-gradient-to-br from-[#F8FAFF] to-[#F0F6FF] relative overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-20 left-20 w-32 h-32 border border-accent rotate-45"></div>
+            <div className="absolute bottom-20 right-20 w-24 h-24 bg-accent/20 rotate-12"></div>
+            <div className="absolute top-1/2 right-1/4 w-16 h-16 border border-accent/30 rotate-12"></div>
+          </div>
+
+          <div className="container mx-auto px-6 relative z-10">
             <motion.div
               initial="initial"
               whileInView="animate"
               viewport={{ once: true, margin: "-100px" }}
               variants={staggerContainer}
-              className="text-center mb-16"
+              className="text-center mb-20"
             >
+              <motion.div variants={fadeInUp} className="mb-6">
+                <Badge
+                  variant="secondary"
+                  className="bg-accent/10 text-accent border border-accent/20 px-4 py-2 text-sm font-medium"
+                >
+                  🏭 Industry Expertise
+                </Badge>
+              </motion.div>
+
               <motion.h2
                 variants={fadeInUp}
-                className="text-3xl lg:text-4xl font-bold mb-4 font-[family-name:var(--font-space-grotesk)]"
+                className="text-4xl lg:text-6xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)] text-foreground"
               >
                 Industries We Serve
               </motion.h2>
+
               <motion.p
                 variants={fadeInUp}
-                className="text-lg text-muted-foreground max-w-2xl mx-auto"
+                className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
               >
                 Delivering specialized electrical solutions across diverse
-                industrial sectors
+                industrial sectors with unmatched expertise and reliability
               </motion.p>
             </motion.div>
 
@@ -628,94 +889,125 @@ export default function HomePage() {
               viewport={{ once: true, margin: "-100px" }}
               className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
             >
-              <motion.div variants={scaleIn} className="text-center">
-                <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <img
-                    src="/oil-and-gas-industry-icon.png"
-                    alt="Oil & Gas"
-                    className="w-10 h-10"
-                  />
-                </div>
-                <h3 className="font-semibold mb-2 font-[family-name:var(--font-space-grotesk)]">
-                  Oil & Gas
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Offshore and onshore electrical solutions
-                </p>
-              </motion.div>
+              {[
+                {
+                  icon: "/oil-and-gas-industry-icon.png",
+                  title: "Oil & Gas",
+                  description: "Offshore and onshore electrical solutions",
+                  color: "from-blue-500 to-blue-600"
+                },
+                {
+                  icon: "/construction-industry-icon.png",
+                  title: "Construction",
+                  description: "Temporary and permanent power solutions",
+                  color: "from-orange-500 to-orange-600"
+                },
+                {
+                  icon: "/manufacturing-industry-icon.png",
+                  title: "Manufacturing",
+                  description: "Industrial automation and control systems",
+                  color: "from-green-500 to-green-600"
+                },
+                {
+                  icon: "/marine-industry-icon.png",
+                  title: "Marine",
+                  description: "Yacht and marine electrical systems",
+                  color: "from-cyan-500 to-cyan-600"
+                }
+              ].map((industry, index) => (
+                <motion.div
+                  key={index}
+                  variants={scaleIn}
+                  className="group text-center"
+                >
+                  <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/50 relative overflow-hidden">
+                    {/* Gradient Background Effect */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${industry.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
 
-              <motion.div variants={scaleIn} className="text-center">
-                <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <img
-                    src="/construction-industry-icon.png"
-                    alt="Construction"
-                    className="w-10 h-10"
-                  />
-                </div>
-                <h3 className="font-semibold mb-2 font-[family-name:var(--font-space-grotesk)]">
-                  Construction
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Temporary and permanent power solutions
-                </p>
-              </motion.div>
+                    <div className="relative z-10">
+                      <div className="w-24 h-24 bg-gradient-to-br from-accent/10 to-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
+                        <img
+                          src={industry.icon}
+                          alt={industry.title}
+                          className="w-12 h-12 group-hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
 
-              <motion.div variants={scaleIn} className="text-center">
-                <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <img
-                    src="/manufacturing-industry-icon.png"
-                    alt="Manufacturing"
-                    className="w-10 h-10"
-                  />
-                </div>
-                <h3 className="font-semibold mb-2 font-[family-name:var(--font-space-grotesk)]">
-                  Manufacturing
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Industrial automation and control systems
-                </p>
-              </motion.div>
+                      <h3 className="font-bold text-xl mb-4 font-[family-name:var(--font-space-grotesk)] text-foreground group-hover:text-accent transition-colors duration-300">
+                        {industry.title}
+                      </h3>
 
-              <motion.div variants={scaleIn} className="text-center">
-                <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <img
-                    src="/marine-industry-icon.png"
-                    alt="Marine"
-                    className="w-10 h-10"
-                  />
-                </div>
-                <h3 className="font-semibold mb-2 font-[family-name:var(--font-space-grotesk)]">
-                  Marine
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Yacht and marine electrical systems
-                </p>
-              </motion.div>
+                      <p className="text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors duration-300">
+                        {industry.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
+
+            {/* Call to Action
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInUp}
+              className="text-center mt-16"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-white font-semibold px-8 py-4 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  Explore Our Solutions
+                  <ArrowRight className="ml-3 w-5 h-5" />
+                </Button>
+              </motion.div>
+            </motion.div> */}
           </div>
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-20">
-          <div className="container mx-auto md:px-20 px-6">
+        <section id="projects" className="py-24 bg-white relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-32 right-32 w-40 h-40 border border-accent rotate-45"></div>
+            <div className="absolute bottom-32 left-32 w-32 h-32 bg-accent/20 rotate-12"></div>
+          </div>
+
+          <div className="container mx-auto px-6 relative z-10">
             <motion.div
               ref={projectsRef}
               initial="initial"
               animate={projectsInView ? "animate" : "initial"}
               variants={staggerContainer}
-              className="text-center mb-16"
+              className="text-center mb-20"
             >
+              <motion.div variants={fadeInUp} className="mb-6">
+                <Badge
+                  variant="secondary"
+                  className="bg-accent/10 text-accent border border-accent/20 px-4 py-2 text-sm font-medium"
+                >
+                  🚀 Success Stories
+                </Badge>
+              </motion.div>
+
               <motion.h2
                 variants={fadeInUp}
-                className="text-3xl lg:text-4xl font-bold mb-4 font-[family-name:var(--font-space-grotesk)]"
+                className="text-4xl lg:text-6xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)] text-foreground"
               >
                 Recent Projects
               </motion.h2>
+
               <motion.p
                 variants={fadeInUp}
-                className="text-lg text-muted-foreground"
+                className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
               >
-                Trusted by leading companies across various industries
+                Trusted by leading companies across various industries, delivering
+                excellence in every project we undertake
               </motion.p>
             </motion.div>
 
@@ -723,107 +1015,222 @@ export default function HomePage() {
               variants={staggerContainer}
               initial="initial"
               animate={projectsInView ? "animate" : "initial"}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
             >
               <motion.div variants={scaleIn}>
-                <Card className="h-full">
-                  <div className="h-48 bg-muted rounded-t-lg overflow-hidden">
+                <div className="group relative overflow-hidden rounded-3xl bg-white shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
+                  {/* Image Section with Overlay */}
+                  <div className="relative h-72 overflow-hidden">
                     <img
                       src="/yacht-marine-electrical-vfd-control-panel-installa.png"
                       alt="Marine VFD installation"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+                    {/* Project Category Badge */}
+                    <div className="absolute top-6 left-6">
+                      <span className="bg-gradient-to-r from-accent to-accent/80 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg backdrop-blur-sm">
+                        🚢 Marine Industry
+                      </span>
+                    </div>
+
+
+
+                    {/* Project Title Overlay */}
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <h3 className="text-white font-bold text-xl mb-2 font-[family-name:var(--font-space-grotesk)]">
+                        SEA SAN Marine Services
+                      </h3>
+                      <p className="text-white/90 text-sm font-medium">
+                        VFD Panel for Yacht Applications
+                      </p>
+                    </div>
                   </div>
-                  <CardHeader>
-                    <CardTitle className="text-lg font-[family-name:var(--font-space-grotesk)]">
-                      SEA SAN Marine Services
-                    </CardTitle>
-                    <CardDescription>
-                      VFD Panel for Yacht Applications
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      Supply and programming of Schneider 7.5KW, single-phase
-                      VFD for marine applications
-                    </p>
-                  </CardContent>
-                </Card>
+
+                  {/* Content Section */}
+                  <div className="p-8">
+                    <div className="space-y-4">
+                      <p className="text-muted-foreground leading-relaxed">
+                        Supply and programming of Schneider 7.5KW, single-phase VFD for marine applications with advanced control systems and monitoring capabilities.
+                      </p>
+
+                      {/* Technical Specs */}
+                      <div className="grid grid-cols-2 gap-4 py-4">
+                        <div className="text-center p-3 bg-accent/5 rounded-xl">
+                          <div className="font-bold text-accent text-lg">7.5KW</div>
+                          <div className="text-xs text-muted-foreground">Power Rating</div>
+                        </div>
+                        <div className="text-center p-3 bg-accent/5 rounded-xl">
+                          <div className="font-bold text-accent text-lg">Single Phase</div>
+                          <div className="text-xs text-muted-foreground">Configuration</div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
               </motion.div>
 
               <motion.div variants={scaleIn}>
-                <Card className="h-full">
-                  <div className="h-48 bg-muted rounded-t-lg overflow-hidden">
+                <div className="group relative overflow-hidden rounded-3xl bg-white shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
+                  {/* Image Section with Overlay */}
+                  <div className="relative h-72 overflow-hidden">
                     <img
                       src="/hotel-automation-control-panel-for-hvac-and-water-.png"
                       alt="Hotel automation system"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+                    {/* Project Category Badge */}
+                    <div className="absolute top-6 left-6">
+                      <span className="bg-gradient-to-r from-accent to-accent/80 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg backdrop-blur-sm">
+                        🏨 Hospitality
+                      </span>
+                    </div>
+
+
+
+                    {/* Project Title Overlay */}
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <h3 className="text-white font-bold text-xl mb-2 font-[family-name:var(--font-space-grotesk)]">
+                        Al Khoory Hotels
+                      </h3>
+                      <p className="text-white/90 text-sm font-medium">
+                        Hotel Automation Systems
+                      </p>
+                    </div>
                   </div>
-                  <CardHeader>
-                    <CardTitle className="text-lg font-[family-name:var(--font-space-grotesk)]">
-                      Al Khoory Hotels
-                    </CardTitle>
-                    <CardDescription>Hotel Automation Systems</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      VFD panels for hot water systems and biology unit
-                      automation panels
-                    </p>
-                  </CardContent>
-                </Card>
+
+                  {/* Content Section */}
+                  <div className="p-8">
+                    <div className="space-y-4">
+                      <p className="text-muted-foreground leading-relaxed">
+                        VFD panels for hot water systems and biology unit automation panels with smart control integration and energy management.
+                      </p>
+
+                      {/* Technical Specs */}
+                      <div className="grid grid-cols-2 gap-4 py-4">
+                        <div className="text-center p-3 bg-accent/5 rounded-xl">
+                          <div className="font-bold text-accent text-lg">HVAC</div>
+                          <div className="text-xs text-muted-foreground">Control System</div>
+                        </div>
+                        <div className="text-center p-3 bg-accent/5 rounded-xl">
+                          <div className="font-bold text-accent text-lg">Smart</div>
+                          <div className="text-xs text-muted-foreground">Integration</div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
               </motion.div>
 
               <motion.div variants={scaleIn}>
-                <Card className="h-full">
-                  <div className="h-48 bg-muted rounded-t-lg overflow-hidden">
+                <div className="group relative overflow-hidden rounded-3xl bg-white shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
+                  {/* Image Section with Overlay */}
+                  <div className="relative h-72 overflow-hidden">
                     <img
-                      src="/placeholder.svg?height=200&width=400"
+                      src="/industrial-electrical-control-panels-and-automatio.png"
                       alt="Stadium power distribution"
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+
+                    {/* Project Category Badge */}
+                    <div className="absolute top-6 left-6">
+                      <span className="bg-gradient-to-r from-accent to-accent/80 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg backdrop-blur-sm">
+                        🏟️ Infrastructure
+                      </span>
+                    </div>
+
+
+
+                    {/* Project Title Overlay */}
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <h3 className="text-white font-bold text-xl mb-2 font-[family-name:var(--font-space-grotesk)]">
+                        Stadium Project
+                      </h3>
+                      <p className="text-white/90 text-sm font-medium">
+                        Power Distribution Systems
+                      </p>
+                    </div>
                   </div>
-                  <CardHeader>
-                    <CardTitle className="text-lg font-[family-name:var(--font-space-grotesk)]">
-                      Stadium Project
-                    </CardTitle>
-                    <CardDescription>Power Distribution</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      Supply of DB-PMAX systems for major stadium infrastructure
-                      project
-                    </p>
-                  </CardContent>
-                </Card>
+
+                  {/* Content Section */}
+                  <div className="p-8">
+                    <div className="space-y-4">
+                      <p className="text-muted-foreground leading-relaxed">
+                        Supply of DB-PMAX systems for major stadium infrastructure project with advanced monitoring capabilities and load management.
+                      </p>
+
+                      {/* Technical Specs */}
+                      <div className="grid grid-cols-2 gap-4 py-4">
+                        <div className="text-center p-3 bg-accent/5 rounded-xl">
+                          <div className="font-bold text-accent text-lg">DB-PMAX</div>
+                          <div className="text-xs text-muted-foreground">System Type</div>
+                        </div>
+                        <div className="text-center p-3 bg-accent/5 rounded-xl">
+                          <div className="font-bold text-accent text-lg">Advanced</div>
+                          <div className="text-xs text-muted-foreground">Monitoring</div>
+                        </div>
+                      </div>
+
+
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             </motion.div>
           </div>
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-20 bg-[#F5F9FF]">
-          <div className="container mx-auto px-6">
-            <div className="max-w-4xl mx-auto">
+        <section id="contact" className="py-24 bg-gradient-to-br from-[#F8FAFF] to-[#F0F6FF] relative overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-20 left-20 w-32 h-32 border border-accent rotate-45"></div>
+            <div className="absolute bottom-20 right-20 w-24 h-24 bg-accent/20 rotate-12"></div>
+            <div className="absolute top-1/2 left-1/4 w-16 h-16 border border-accent/30 rotate-12"></div>
+          </div>
+
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="max-w-6xl mx-auto">
               <motion.div
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true, margin: "-100px" }}
                 variants={staggerContainer}
-                className="text-center mb-16"
+                className="text-center mb-20"
               >
+                <motion.div variants={fadeInUp} className="mb-6">
+                  <Badge
+                    variant="secondary"
+                    className="bg-accent/10 text-accent border border-accent/20 px-4 py-2 text-sm font-medium"
+                  >
+                    📞 Let's Connect
+                  </Badge>
+                </motion.div>
+
                 <motion.h2
                   variants={fadeInUp}
-                  className="text-3xl lg:text-4xl font-bold mb-4 font-[family-name:var(--font-space-grotesk)]"
+                  className="text-4xl lg:text-6xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)] text-foreground"
                 >
                   Get in Touch
                 </motion.h2>
+
                 <motion.p
                   variants={fadeInUp}
-                  className="text-lg text-muted-foreground"
+                  className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
                 >
                   Ready to discuss your electrical project requirements?
+                  Let's build something extraordinary together
                 </motion.p>
               </motion.div>
 
@@ -832,86 +1239,101 @@ export default function HomePage() {
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true, margin: "-100px" }}
-                className="grid lg:grid-cols-2 gap-12"
+                className="max-w-5xl mx-auto"
               >
-                <motion.div variants={fadeInUp}>
-                  <h3 className="text-xl font-semibold mb-6 font-[family-name:var(--font-space-grotesk)]">
-                    Contact Information
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <Phone className="w-5 h-5 text-accent" />
-                      <span>+971 588446578, +971 521083644</span>
+                <div className="grid lg:grid-cols-3 gap-8 mb-16">
+                  {/* Phone Contact */}
+                  <motion.div variants={fadeInUp}>
+                    <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center group border border-gray-100 h-full flex flex-col">
+                      <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <Phone className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-lg font-bold mb-4 text-gray-900">
+                        Call Us
+                      </h3>
+                      <div className="space-y-1 flex-grow">
+                        <a
+                          href="tel:+971588446578"
+                          className="block text-base font-semibold text-accent hover:text-accent/80 transition-colors duration-300"
+                        >
+                          +971 588446578
+                        </a>
+                        <a
+                          href="tel:+971521083644"
+                          className="block text-base font-semibold text-accent hover:text-accent/80 transition-colors duration-300"
+                        >
+                          +971 521083644
+                        </a>
+                      </div>
+                      <p className="text-sm text-gray-600 mt-4">
+                        Available 24/7 for emergency support
+                      </p>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Mail className="w-5 h-5 text-accent" />
-                      <span>info@taqniyoon.com</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <MapPin className="w-5 h-5 text-accent" />
-                      <span>UAE - Middle East Region</span>
-                    </div>
-                  </div>
+                  </motion.div>
 
-                  <div className="mt-8">
-                    <img
-                      src="/placeholder.svg?height=250&width=400"
-                      alt="TAQNIYOON office"
-                      className="w-full h-48 object-cover rounded-lg shadow-md"
-                    />
-                  </div>
-                </motion.div>
+                  {/* Email Contact */}
+                  <motion.div variants={fadeInUp}>
+                    <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center group border border-gray-100 h-full flex flex-col">
+                      <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <Mail className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-lg font-bold mb-4 text-gray-900">
+                        Email Us
+                      </h3>
+                      <div className="flex-grow">
+                        <a
+                          href="mailto:info@taqniyoon.com?subject=Project Inquiry&body=Hello TAQNIYOON Team,%0D%0A%0D%0AI am interested in your electrical services and would like to discuss my project requirements.%0D%0A%0D%0AProject Details:%0D%0A- Industry: %0D%0A- Service Required: %0D%0A- Timeline: %0D%0A- Location: %0D%0A%0D%0APlease contact me to schedule a consultation.%0D%0A%0D%0AThank you."
+                          className="text-base font-semibold text-accent hover:text-accent/80 transition-colors duration-300 block"
+                        >
+                          info@taqniyoon.com
+                        </a>
+                      </div>
+                      <p className="text-sm text-gray-600 mt-4">
+                        We respond within 24 hours
+                      </p>
+                    </div>
+                  </motion.div>
 
-                <motion.div variants={fadeInUp}>
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="font-[family-name:var(--font-space-grotesk)]">
-                        Request a Quote
-                      </CardTitle>
-                      <CardDescription>
-                        Tell us about your project requirements
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <label className="text-sm font-medium mb-2 block">
-                            Name
-                          </label>
-                          <input className="w-full px-3 py-2 border border-input rounded-md bg-background" />
-                        </div>
-                        <div>
-                          <label className="text-sm font-medium mb-2 block">
-                            Company
-                          </label>
-                          <input className="w-full px-3 py-2 border border-input rounded-md bg-background" />
-                        </div>
+                  {/* Location */}
+                  <motion.div variants={fadeInUp}>
+                    <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center group border border-gray-100 h-full flex flex-col">
+                      <div className="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <MapPin className="w-8 h-8 text-white" />
                       </div>
-                      <div>
-                        <label className="text-sm font-medium mb-2 block">
-                          Email
-                        </label>
-                        <input
-                          type="email"
-                          className="w-full px-3 py-2 border border-input rounded-md bg-background"
-                        />
+                      <h3 className="text-lg font-bold mb-4 text-gray-900">
+                        Visit Us
+                      </h3>
+                      <div className="flex-grow">
+                        <p className="text-base font-semibold text-gray-900 mb-2">
+                          UAE - Middle East Region
+                        </p>
                       </div>
-                      <div>
-                        <label className="text-sm font-medium mb-2 block">
-                          Project Details
-                        </label>
-                        <textarea
-                          rows={4}
-                          className="w-full px-3 py-2 border border-input rounded-md bg-background resize-none"
-                        ></textarea>
-                      </div>
-                      <Button className="w-full bg-accent hover:bg-accent/90">
-                        Send Message
-                      </Button>
-                    </CardContent>
-                  </Card>
+                      <p className="text-sm text-gray-600 mt-4">
+                        Serving across the Gulf region
+                      </p>
+                    </div>
+                  </motion.div>
+                </div>
+
+                {/* Company Image */}
+                <motion.div variants={fadeInUp} className="relative overflow-hidden rounded-3xl shadow-2xl group">
+                  <img
+                    src="/industrial-electrical-panel-control-room-with-mode.png"
+                    alt="TAQNIYOON Technical Services - Professional electrical solutions"
+                    className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                  <div className="absolute bottom-8 left-8 right-8 text-center">
+                    <h4 className="text-white font-bold text-2xl mb-2 font-[family-name:var(--font-space-grotesk)]">
+                      TAQNIYOON Technical Services
+                    </h4>
+                    <p className="text-white/90 text-lg">
+                      Your trusted partner for industrial electrical solutions
+                    </p>
+                  </div>
                 </motion.div>
               </motion.div>
+
             </div>
           </div>
         </section>
@@ -922,72 +1344,166 @@ export default function HomePage() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="bg-[#0B192C] text-primary-foreground py-12"
+          className="bg-gradient-to-br from-[#0B192C] to-[#1A2332] text-white relative overflow-hidden"
         >
-          <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-4 gap-8">
-              <div>
-                <div className="flex items-center space-x-2 mb-4">
-                  <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
-                    {/* <Zap className="w-5 h-5 text-accent-foreground" /> */}
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-20 left-20 w-32 h-32 border border-accent rotate-45"></div>
+            <div className="absolute bottom-20 right-20 w-24 h-24 bg-accent/20 rotate-12"></div>
+            <div className="absolute top-1/2 left-1/4 w-16 h-16 border border-accent/30 rotate-12"></div>
+          </div>
+
+          <div className="container mx-auto px-6 py-16 relative z-10">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+              {/* Company Info */}
+              <div className="lg:col-span-1">
+                <motion.div
+                  className="flex items-center space-x-3 mb-6"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg">
                     <Image
                       src="/taqnioon-logo.png"
-                      alt="logo"
+                      alt="TAQNIYOON Logo"
                       width={100}
                       height={100}
-                      className="w-8 h-8 text-primary-foreground"
+                      className="w-10 h-10 object-contain"
                     />
                   </div>
                   <div>
-                    <h3 className="font-bold font-[family-name:var(--font-space-grotesk)]">
+                    <h3 className="font-bold text-xl font-[family-name:var(--font-space-grotesk)]">
                       TAQNIYOON
                     </h3>
-                    <p className="text-xs opacity-80">Technical Services</p>
+                    <p className="text-sm text-white/70">Technical Services Co. LLC</p>
+                  </div>
+                </motion.div>
+
+                <p className="text-white/80 leading-relaxed mb-6">
+                  Leading provider of industrial electrical solutions in the UAE
+                  and Middle East, delivering excellence since 2009.
+                </p>
+
+                {/* Contact Info */}
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3 text-sm">
+                    <Phone className="w-4 h-4 text-accent" />
+                    <span className="text-white/80">+971 588446578</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm">
+                    <Mail className="w-4 h-4 text-accent" />
+                    <span className="text-white/80">info@taqniyoon.com</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-sm">
+                    <MapPin className="w-4 h-4 text-accent" />
+                    <span className="text-white/80">UAE - Middle East</span>
                   </div>
                 </div>
-                <p className="text-sm opacity-80">
-                  Leading provider of industrial electrical solutions in the UAE
-                  and Middle East.
-                </p>
               </div>
 
+              {/* Services */}
               <div>
-                <h4 className="font-semibold mb-4">Services</h4>
-                <ul className="space-y-2 text-sm opacity-80">
-                  <li>Industrial Panels</li>
-                  <li>Automation Systems</li>
-                  <li>Power Management</li>
-                  <li>Electrical Retrofitting</li>
-                  <li>Special Purpose Panels</li>
-                  <li>Capacitor Banks</li>
+                <h4 className="font-bold text-lg mb-6 font-[family-name:var(--font-space-grotesk)]">
+                  Our Services
+                </h4>
+                <ul className="space-y-3">
+                  {[
+                    "Industrial Panels",
+                    "Automation Systems",
+                    "Power Management",
+                    "Electrical Retrofitting",
+                    "Special Purpose Panels",
+                    "Capacitor Banks"
+                  ].map((service, index) => (
+                    <li key={index}>
+                      <a
+                        href="#services"
+                        className="text-white/70 hover:text-accent transition-colors duration-300 text-sm flex items-center gap-2 group"
+                      >
+                        <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        {service}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
+              {/* Industries */}
               <div>
-                <h4 className="font-semibold mb-4">Industries</h4>
-                <ul className="space-y-2 text-sm opacity-80">
-                  <li>Oil & Gas</li>
-                  <li>Construction</li>
-                  <li>Manufacturing</li>
-                  <li>Marine</li>
+                <h4 className="font-bold text-lg mb-6 font-[family-name:var(--font-space-grotesk)]">
+                  Industries
+                </h4>
+                <ul className="space-y-3">
+                  {[
+                    "Oil & Gas",
+                    "Construction",
+                    "Manufacturing",
+                    "Marine",
+                    "Infrastructure",
+                    "Hospitality"
+                  ].map((industry, index) => (
+                    <li key={index}>
+                      <a
+                        href="#"
+                        className="text-white/70 hover:text-accent transition-colors duration-300 text-sm flex items-center gap-2 group"
+                      >
+                        <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        {industry}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
+              {/* Company & Certifications */}
               <div>
-                <h4 className="font-semibold mb-4">Company</h4>
-                <ul className="space-y-2 text-sm opacity-80">
-                  <li>About Us</li>
-                  <li>Projects</li>
-                  <li>Contact</li>
+                <h4 className="font-bold text-lg mb-6 font-[family-name:var(--font-space-grotesk)]">
+                  Company
+                </h4>
+                <ul className="space-y-3 mb-8">
+                  {[
+                    { label: "About Us", href: "#about" },
+                    { label: "Projects", href: "#projects" },
+                    { label: "Contact", href: "#contact" },
+                    { label: "Careers", href: "#" }
+                  ].map((link, index) => (
+                    <li key={index}>
+                      <a
+                        href={link.href}
+                        className="text-white/70 hover:text-accent transition-colors duration-300 text-sm flex items-center gap-2 group"
+                      >
+                        <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
+
+                {/* Certifications */}
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+                  <h5 className="font-semibold text-sm mb-3 text-accent">Certifications</h5>
+                  <div className="space-y-2 text-xs text-white/70">
+                    <p>✓ ISO 9001:2015 Certified</p>
+                    <p>✓ UAE Trade License</p>
+                    <p>✓ Industry Compliance</p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
-              <p className="text-sm opacity-80">
-                © 2025 TAQNIYOON Technical Services Co. LLC. All rights
-                reserved.
-              </p>
+            {/* Bottom Section */}
+            <div className="border-t border-white/10 mt-12 pt-8">
+              <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p className="text-sm text-white/60">
+                  © 2025 TAQNIYOON Technical Services Co. LLC. All rights reserved.
+                </p>
+
+                <div className="flex items-center gap-6 text-sm text-white/60">
+                  <a href="#" className="hover:text-accent transition-colors duration-300">Privacy Policy</a>
+                  <a href="#" className="hover:text-accent transition-colors duration-300">Terms of Service</a>
+                  {/* <a href="#" className="hover:text-accent transition-colors duration-300">Sitemap</a> */}
+                </div>
+              </div>
             </div>
           </div>
         </motion.footer>

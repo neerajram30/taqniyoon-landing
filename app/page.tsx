@@ -133,9 +133,10 @@ export default function HomePage() {
             </nav>
 
             <div className="flex items-center space-x-4">
-              <motion.div
+             <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                className="hidden lg:block"
               >
                 <a href="#contact">
                   <Button className="bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-white font-semibold px-6 py-2.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">

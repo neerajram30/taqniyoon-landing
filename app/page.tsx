@@ -723,7 +723,7 @@ export default function HomePage() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-24 bg-white relative overflow-hidden">
+        <section id="about" className="py-24 bg-[#1A2332] relative overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-32 right-32 w-40 h-40 border border-accent rotate-45"></div>
@@ -749,7 +749,7 @@ export default function HomePage() {
                     </Badge>
                   </motion.div>
 
-                  <h2 className="text-4xl lg:text-6xl font-bold mb-8 font-[family-name:var(--font-space-grotesk)] text-foreground leading-tight">
+                  <h2 className="text-4xl lg:text-6xl font-bold mb-8 font-[family-name:var(--font-space-grotesk)] text-white leading-tight">
                     Leading Technical Excellence
                   </h2>
                 </div>
@@ -972,7 +972,7 @@ export default function HomePage() {
         </section>
 
         {/* Projects Section */}
-        <section id="projects" className="py-24 bg-white relative overflow-hidden">
+        <section id="projects" className="py-24 bg-[#1A2332] relative overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-32 right-32 w-40 h-40 border border-accent rotate-45"></div>
@@ -998,7 +998,7 @@ export default function HomePage() {
 
               <motion.h2
                 variants={fadeInUp}
-                className="text-4xl lg:text-6xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)] text-foreground"
+                className="text-4xl lg:text-6xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)] text-white"
               >
                 Recent Projects
               </motion.h2>

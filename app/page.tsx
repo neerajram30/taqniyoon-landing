@@ -86,7 +86,7 @@ export default function HomePage() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="border-b border-border/50 bg-white/95 backdrop-blur-md sticky top-0 z-50 shadow-sm"
+          className="border-b border-black/50 bg-black backdrop-blur-md sticky top-0 z-50 shadow-sm"
         >
           <div className="container mx-auto px-6 py-5 flex items-center justify-between">
             <motion.div
@@ -104,7 +104,7 @@ export default function HomePage() {
                 />
               </div>
               <div>
-                <h1 className="font-bold text-xl font-[family-name:var(--font-space-grotesk)] text-foreground">
+                <h1 className="font-bold text-xl font-[family-name:var(--font-space-grotesk)] text-white">
                   TAQNIYOON
                 </h1>
                 <p className="text-xs text-muted-foreground font-medium tracking-wide">
@@ -123,7 +123,7 @@ export default function HomePage() {
                 <motion.a
                   key={item.href}
                   href={item.href}
-                  className="text-sm font-medium text-foreground/80 hover:text-accent transition-all duration-300 relative group"
+                  className="text-sm font-medium text-white/80 hover:text-accent transition-all duration-300 relative group"
                   whileHover={{ y: -1 }}
                 >
                   {item.label}
@@ -148,7 +148,7 @@ export default function HomePage() {
 
               {/* Mobile Menu Button */}
               <button
-                className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+                className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors text-white"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,7 +169,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-b border-border/50 shadow-lg z-40"
+              className="lg:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-md border-b border-border/50 shadow-lg z-40"
             >
               <div className="container mx-auto px-6 py-6">
                 <nav className="flex flex-col space-y-4">
@@ -182,7 +182,7 @@ export default function HomePage() {
                     <motion.a
                       key={item.href}
                       href={item.href}
-                      className="text-lg font-medium text-foreground/80 hover:text-accent transition-colors py-2 border-b border-border/20 last:border-b-0"
+                      className="text-lg font-medium text-white hover:text-accent transition-colors py-2 border-b border-border/20 last:border-b-0"
                       onClick={() => setMobileMenuOpen(false)}
                       whileHover={{ x: 10 }}
                     >
@@ -371,7 +371,10 @@ export default function HomePage() {
         </section>
 
         {/* Services Section */}
-        <section id="services" className="py-24 bg-gradient-to-br from-[#F8FAFF] to-[#F0F6FF] relative overflow-hidden">
+        <section id="services" 
+        // className="py-24 bg-gradient-to-br from-[#F8FAFF] to-[#F0F6FF] relative overflow-hidden"
+        className="py-24 relative overflow-hidden bg-[#0C0C0C]"
+        >
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-20 left-20 w-32 h-32 border border-accent rotate-45"></div>
@@ -398,7 +401,7 @@ export default function HomePage() {
 
               <motion.h2
                 variants={fadeInUp}
-                className="text-4xl lg:text-6xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)] text-foreground"
+                className="text-4xl lg:text-6xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)] text-white"
               >
                 Our Core Services
               </motion.h2>
@@ -419,15 +422,15 @@ export default function HomePage() {
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
               <motion.div variants={scaleIn}>
-                <Card className="group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full border-0 bg-white/80 backdrop-blur-sm hover:-translate-y-2 relative overflow-hidden">
+                <Card className="bg-white/5 backdrop-blur-sm border border-white/10 group hover:shadow-2xl transition-all duration-500 h-full  hover:-translate-y-2 relative overflow-hidden hover:shadow-accent/10">
                   {/* Gradient Border Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  {/* <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> */}
 
                   <CardHeader className="relative z-10 pb-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                       <Zap className="w-8 h-8 text-white" />
                     </div>
-                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300">
+                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300 text-white">
                       Industrial Panels
                     </CardTitle>
                     <CardDescription className="text-base leading-relaxed">
@@ -453,7 +456,7 @@ export default function HomePage() {
                       ].map((item, index) => (
                         <motion.li
                           key={index}
-                          className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                          className="flex items-center gap-3 text-muted-foreground transition-colors duration-300"
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
@@ -470,14 +473,14 @@ export default function HomePage() {
               </motion.div>
 
               <motion.div variants={scaleIn}>
-                <Card className="group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full border-0 bg-white/80 backdrop-blur-sm hover:-translate-y-2 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <Card className="bg-white/5 backdrop-blur-sm border border-white/10 group hover:shadow-2xl transition-all duration-500 h-full hover:-translate-y-2 relative overflow-hidden hover:shadow-accent/10">
+                  {/* <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> */}
 
                   <CardHeader className="relative z-10 pb-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                       <Settings className="w-8 h-8 text-white" />
                     </div>
-                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300">
+                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300 text-white">
                       Automation & Control
                     </CardTitle>
                     <CardDescription className="text-base leading-relaxed">
@@ -503,7 +506,7 @@ export default function HomePage() {
                       ].map((item, index) => (
                         <motion.li
                           key={index}
-                          className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                          className="flex items-center gap-3 text-muted-foreground transition-colors duration-300"
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
@@ -520,14 +523,14 @@ export default function HomePage() {
               </motion.div>
 
               <motion.div variants={scaleIn}>
-                <Card className="group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full border-0 bg-white/80 backdrop-blur-sm hover:-translate-y-2 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <Card className="bg-white/5 backdrop-blur-sm border border-white/10 group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full hover:-translate-y-2 relative overflow-hidden">
+                  {/* <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> */}
 
                   <CardHeader className="relative z-10 pb-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                       <Shield className="w-8 h-8 text-white" />
                     </div>
-                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300">
+                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300 text-white">
                       Power Systems
                     </CardTitle>
                     <CardDescription className="text-base leading-relaxed">
@@ -553,7 +556,7 @@ export default function HomePage() {
                       ].map((item, index) => (
                         <motion.li
                           key={index}
-                          className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                          className="flex items-center gap-3 text-muted-foreground transition-colors duration-300"
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
@@ -570,14 +573,14 @@ export default function HomePage() {
               </motion.div>
 
               <motion.div variants={scaleIn}>
-                <Card className="group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full border-0 bg-white/80 backdrop-blur-sm hover:-translate-y-2 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <Card className="bg-white/5 backdrop-blur-sm border border-white/10 group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full hover:-translate-y-2 relative overflow-hidden">
+                  {/* <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> */}
 
                   <CardHeader className="relative z-10 pb-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                       <Factory className="w-8 h-8 text-white" />
                     </div>
-                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300">
+                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300 text-white">
                       Electrical Retrofitting
                     </CardTitle>
                     <CardDescription className="text-base leading-relaxed">
@@ -603,7 +606,7 @@ export default function HomePage() {
                       ].map((item, index) => (
                         <motion.li
                           key={index}
-                          className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                          className="flex items-center gap-3 text-muted-foreground transition-colors duration-300"
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
@@ -620,14 +623,14 @@ export default function HomePage() {
               </motion.div>
 
               <motion.div variants={scaleIn}>
-                <Card className="group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full border-0 bg-white/80 backdrop-blur-sm hover:-translate-y-2 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <Card className="bg-white/5 backdrop-blur-sm border border-white/10 group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full hover:-translate-y-2 relative overflow-hidden">
+                  {/* <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> */}
 
                   <CardHeader className="relative z-10 pb-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                       <Cpu className="w-8 h-8 text-white" />
                     </div>
-                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300">
+                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300 text-white">
                       Special Purpose Panels
                     </CardTitle>
                     <CardDescription className="text-base leading-relaxed">
@@ -653,7 +656,7 @@ export default function HomePage() {
                       ].map((item, index) => (
                         <motion.li
                           key={index}
-                          className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                          className="flex items-center gap-3 text-muted-foreground transition-colors duration-300"
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
@@ -670,14 +673,14 @@ export default function HomePage() {
               </motion.div>
 
               <motion.div variants={scaleIn}>
-                <Card className="group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full border-0 bg-white/80 backdrop-blur-sm hover:-translate-y-2 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <Card className="bg-white/5 backdrop-blur-sm border border-white/10 group hover:shadow-2xl hover:shadow-accent/10 transition-all duration-500 h-full hover:-translate-y-2 relative overflow-hidden">
+                  {/* <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div> */}
 
                   <CardHeader className="relative z-10 pb-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                       <Power className="w-8 h-8 text-white" />
                     </div>
-                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300">
+                    <CardTitle className="font-[family-name:var(--font-space-grotesk)] text-xl mb-3 group-hover:text-accent transition-colors duration-300 text-white">
                       Capacitor Banks
                     </CardTitle>
                     <CardDescription className="text-base leading-relaxed">
@@ -703,7 +706,7 @@ export default function HomePage() {
                       ].map((item, index) => (
                         <motion.li
                           key={index}
-                          className="flex items-center gap-3 text-muted-foreground group-hover:text-foreground transition-colors duration-300"
+                          className="flex items-center gap-3 text-muted-foreground transition-colors duration-300"
                           initial={{ opacity: 0, x: -10 }}
                           animate={{ opacity: 1, x: 0 }}
                           transition={{ delay: index * 0.1 }}
@@ -723,7 +726,7 @@ export default function HomePage() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-24 bg-[#1A2332] relative overflow-hidden">
+        <section id="about" className="py-24 bg-[#000000] relative overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-32 right-32 w-40 h-40 border border-accent rotate-45"></div>
@@ -782,7 +785,7 @@ export default function HomePage() {
                     <motion.div
                       key={index}
                       variants={scaleIn}
-                      className="bg-gradient-to-br from-accent/5 to-accent/10 p-6 rounded-2xl border border-accent/10 hover:border-accent/20 transition-all duration-300 group"
+                      className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl  hover:border-accent/20 transition-all duration-300 group"
                     >
                       <div className="text-2xl mb-2">{stat.icon}</div>
                       <h3 className="font-bold text-3xl text-accent mb-2 group-hover:scale-105 transition-transform duration-300">
@@ -841,138 +844,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Industries Section */}
-        <section className="py-24 bg-gradient-to-br from-[#F8FAFF] to-[#F0F6FF] relative overflow-hidden">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-20 left-20 w-32 h-32 border border-accent rotate-45"></div>
-            <div className="absolute bottom-20 right-20 w-24 h-24 bg-accent/20 rotate-12"></div>
-            <div className="absolute top-1/2 right-1/4 w-16 h-16 border border-accent/30 rotate-12"></div>
-          </div>
-
-          <div className="container mx-auto px-6 relative z-10">
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={staggerContainer}
-              className="text-center mb-20"
-            >
-              <motion.div variants={fadeInUp} className="mb-6">
-                <Badge
-                  variant="secondary"
-                  className="bg-accent/10 text-accent border border-accent/20 px-4 py-2 text-sm font-medium"
-                >
-                  🏭 Industry Expertise
-                </Badge>
-              </motion.div>
-
-              <motion.h2
-                variants={fadeInUp}
-                className="text-4xl lg:text-6xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)] text-foreground"
-              >
-                Industries We Serve
-              </motion.h2>
-
-              <motion.p
-                variants={fadeInUp}
-                className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
-              >
-                Delivering specialized electrical solutions across diverse
-                industrial sectors with unmatched expertise and reliability
-              </motion.p>
-            </motion.div>
-
-            <motion.div
-              variants={staggerContainer}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true, margin: "-100px" }}
-              className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
-            >
-              {[
-                {
-                  icon: "/oil-and-gas-industry-icon.png",
-                  title: "Oil & Gas",
-                  description: "Offshore and onshore electrical solutions",
-                  color: "from-blue-500 to-blue-600"
-                },
-                {
-                  icon: "/construction-industry-icon.png",
-                  title: "Construction",
-                  description: "Temporary and permanent power solutions",
-                  color: "from-orange-500 to-orange-600"
-                },
-                {
-                  icon: "/manufacturing-industry-icon.png",
-                  title: "Manufacturing",
-                  description: "Industrial automation and control systems",
-                  color: "from-green-500 to-green-600"
-                },
-                {
-                  icon: "/marine-industry-icon.png",
-                  title: "Marine",
-                  description: "Yacht and marine electrical systems",
-                  color: "from-cyan-500 to-cyan-600"
-                }
-              ].map((industry, index) => (
-                <motion.div
-                  key={index}
-                  variants={scaleIn}
-                  className="group text-center"
-                >
-                  <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/50 relative overflow-hidden">
-                    {/* Gradient Background Effect */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${industry.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
-
-                    <div className="relative z-10">
-                      <div className="w-24 h-24 bg-gradient-to-br from-accent/10 to-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
-                        <img
-                          src={industry.icon}
-                          alt={industry.title}
-                          className="w-12 h-12 group-hover:scale-110 transition-transform duration-300"
-                        />
-                      </div>
-
-                      <h3 className="font-bold text-xl mb-4 font-[family-name:var(--font-space-grotesk)] text-foreground group-hover:text-accent transition-colors duration-300">
-                        {industry.title}
-                      </h3>
-
-                      <p className="text-muted-foreground leading-relaxed group-hover:text-foreground transition-colors duration-300">
-                        {industry.description}
-                      </p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            {/* Call to Action
-            <motion.div
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={fadeInUp}
-              className="text-center mt-16"
-            >
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-white font-semibold px-8 py-4 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  Explore Our Solutions
-                  <ArrowRight className="ml-3 w-5 h-5" />
-                </Button>
-              </motion.div>
-            </motion.div> */}
-          </div>
-        </section>
+        
 
         {/* Projects Section */}
-        <section id="projects" className="py-24 bg-[#1A2332] relative overflow-hidden">
+        <section id="projects" className="py-24 bg-[#0C0C0C] relative overflow-hidden">
           {/* Background Elements */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-32 right-32 w-40 h-40 border border-accent rotate-45"></div>
@@ -1019,7 +894,7 @@ export default function HomePage() {
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
             >
               <motion.div variants={scaleIn}>
-                <div className="group relative overflow-hidden rounded-3xl bg-white shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
+                <div className="bg-white/5 backdrop-blur-sm border border-white/10 group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
                   {/* Image Section with Overlay */}
                   <div className="relative h-72 overflow-hidden">
                     <img
@@ -1076,7 +951,7 @@ export default function HomePage() {
               </motion.div>
 
               <motion.div variants={scaleIn}>
-                <div className="group relative overflow-hidden rounded-3xl bg-white shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
+                <div className="bg-white/5 backdrop-blur-sm border border-white/10 group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
                   {/* Image Section with Overlay */}
                   <div className="relative h-72 overflow-hidden">
                     <img
@@ -1133,7 +1008,7 @@ export default function HomePage() {
               </motion.div>
 
               <motion.div variants={scaleIn}>
-                <div className="group relative overflow-hidden rounded-3xl bg-white shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
+                <div className="bg-white/5 backdrop-blur-sm border border-white/10 group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
                   {/* Image Section with Overlay */}
                   <div className="relative h-72 overflow-hidden">
                     <img
@@ -1192,8 +1067,142 @@ export default function HomePage() {
           </div>
         </section>
 
+
+        {/* Industries Section */}
+        <section 
+        className="py-24 bg-[#000000] relative overflow-hidden"
+        
+        >
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-20 left-20 w-32 h-32 border border-accent rotate-45"></div>
+            <div className="absolute bottom-20 right-20 w-24 h-24 bg-accent/20 rotate-12"></div>
+            <div className="absolute top-1/2 right-1/4 w-16 h-16 border border-accent/30 rotate-12"></div>
+          </div>
+
+          <div className="container mx-auto px-6 relative z-10">
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+              className="text-center mb-20"
+            >
+              <motion.div variants={fadeInUp} className="mb-6">
+                <Badge
+                  variant="secondary"
+                  className="bg-accent/10 text-accent border border-accent/20 px-4 py-2 text-sm font-medium"
+                >
+                  🏭 Industry Expertise
+                </Badge>
+              </motion.div>
+
+              <motion.h2
+                variants={fadeInUp}
+                className="text-4xl lg:text-6xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)] text-white"
+              >
+                Industries We Serve
+              </motion.h2>
+
+              <motion.p
+                variants={fadeInUp}
+                className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
+              >
+                Delivering specialized electrical solutions across diverse
+                industrial sectors with unmatched expertise and reliability
+              </motion.p>
+            </motion.div>
+
+            <motion.div
+              variants={staggerContainer}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
+            >
+              {[
+                {
+                  icon: "/oil-and-gas-industry-icon.png",
+                  title: "Oil & Gas",
+                  description: "Offshore and onshore electrical solutions",
+                  color: "from-blue-500 to-blue-600"
+                },
+                {
+                  icon: "/construction-industry-icon.png",
+                  title: "Construction",
+                  description: "Temporary and permanent power solutions",
+                  color: "from-orange-500 to-orange-600"
+                },
+                {
+                  icon: "/manufacturing-industry-icon.png",
+                  title: "Manufacturing",
+                  description: "Industrial automation and control systems",
+                  color: "from-green-500 to-green-600"
+                },
+                {
+                  icon: "/marine-industry-icon.png",
+                  title: "Marine",
+                  description: "Provide Yacht and marine electrical systems",
+                  color: "from-cyan-500 to-cyan-600"
+                }
+              ].map((industry, index) => (
+                <motion.div
+                  key={index}
+                  variants={scaleIn}
+                  className="group text-center"
+                >
+                  <div className="bg-white/5 backdrop-blur-sm border border-white/10  rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
+                    {/* Gradient Background Effect */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${industry.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+
+                    <div className="relative z-10">
+                      <div className="w-24 h-24 bg-gradient-to-br from-accent/10 to-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
+                        <img
+                          src={industry.icon}
+                          alt={industry.title}
+                          className="w-12 h-12 group-hover:scale-110 transition-transform duration-300"
+                        />
+                      </div>
+
+                      <h3 className="font-bold text-xl mb-4 font-[family-name:var(--font-space-grotesk)] text-white group-hover:text-accent transition-colors duration-300">
+                        {industry.title}
+                      </h3>
+
+                      <p className="text-muted-foreground leading-relaxed group-hover:text-muted-foreground transition-colors duration-300">
+                        {industry.description}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            {/* Call to Action
+            <motion.div
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInUp}
+              className="text-center mt-16"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-accent to-accent/90 hover:from-accent/90 hover:to-accent text-white font-semibold px-8 py-4 text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                >
+                  Explore Our Solutions
+                  <ArrowRight className="ml-3 w-5 h-5" />
+                </Button>
+              </motion.div>
+            </motion.div> */}
+          </div>
+        </section>
+
         {/* Contact Section */}
-        <section id="contact" className="py-24 bg-gradient-to-br from-[#F8FAFF] to-[#F0F6FF] relative overflow-hidden">
+        <section id="contact" className="py-24 bg-[#0C0C0C] relative overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-20 left-20 w-32 h-32 border border-accent rotate-45"></div>
@@ -1221,7 +1230,7 @@ export default function HomePage() {
 
                 <motion.h2
                   variants={fadeInUp}
-                  className="text-4xl lg:text-6xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)] text-foreground"
+                  className="text-4xl lg:text-6xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)] text-white"
                 >
                   Get in Touch
                 </motion.h2>
@@ -1245,11 +1254,11 @@ export default function HomePage() {
                 <div className="grid lg:grid-cols-3 gap-8 mb-16">
                   {/* Phone Contact */}
                   <motion.div variants={fadeInUp}>
-                    <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center group border border-gray-100 h-full flex flex-col">
+                    <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10  p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center group h-full flex flex-col">
                       <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
                         <Phone className="w-8 h-8 text-white" />
                       </div>
-                      <h3 className="text-lg font-bold mb-4 text-gray-900">
+                      <h3 className="text-lg font-bold mb-4 text-white">
                         Call Us
                       </h3>
                       <div className="space-y-1 flex-grow">
@@ -1266,7 +1275,7 @@ export default function HomePage() {
                           +971 521083644
                         </a>
                       </div>
-                      <p className="text-sm text-gray-600 mt-4">
+                      <p className="text-sm text-gray-400 mt-4">
                         Available 24/7 for emergency support
                       </p>
                     </div>
@@ -1274,11 +1283,11 @@ export default function HomePage() {
 
                   {/* Email Contact */}
                   <motion.div variants={fadeInUp}>
-                    <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center group border border-gray-100 h-full flex flex-col">
+                    <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10  p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center group h-full flex flex-col">
                       <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
                         <Mail className="w-8 h-8 text-white" />
                       </div>
-                      <h3 className="text-lg font-bold mb-4 text-gray-900">
+                      <h3 className="text-lg font-bold mb-4 text-white">
                         Email Us
                       </h3>
                       <div className="flex-grow">
@@ -1289,7 +1298,7 @@ export default function HomePage() {
                           info@taqniyoon.com
                         </a>
                       </div>
-                      <p className="text-sm text-gray-600 mt-4">
+                      <p className="text-sm text-gray-400 mt-4">
                         We respond within 24 hours
                       </p>
                     </div>
@@ -1297,19 +1306,19 @@ export default function HomePage() {
 
                   {/* Location */}
                   <motion.div variants={fadeInUp}>
-                    <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center group border border-gray-100 h-full flex flex-col">
+                    <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10  p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center group h-full flex flex-col">
                       <div className="w-16 h-16 bg-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
                         <MapPin className="w-8 h-8 text-white" />
                       </div>
-                      <h3 className="text-lg font-bold mb-4 text-gray-900">
+                      <h3 className="text-lg font-bold mb-4 text-white">
                         Visit Us
                       </h3>
                       <div className="flex-grow">
-                        <p className="text-base font-semibold text-gray-900 mb-2">
+                        <p className="text-accent hover:text-accent/80 font-semibold mb-2">
                           UAE - Middle East Region
                         </p>
                       </div>
-                      <p className="text-sm text-gray-600 mt-4">
+                      <p className="text-sm text-gray-400 mt-4">
                         Serving across the Gulf region
                       </p>
                     </div>
@@ -1345,7 +1354,7 @@ export default function HomePage() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="bg-gradient-to-br from-[#0B192C] to-[#1A2332] text-white relative overflow-hidden"
+          className="bg-gradient-to-br from-[#000000] to-[#0d0d0d] text-white relative overflow-hidden"
         >
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">

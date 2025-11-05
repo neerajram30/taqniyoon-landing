@@ -49,7 +49,7 @@ export const recentProjects = [
     },
     {
         id:5,
-        title:"Sharjah Safar Park - Birdi Project",
+        title:"Sharjah Safari Park - Birdi Project",
         subtitle:"Park Electrical Systems",
         description:"Lighting control panels and automation systems for outdoor park infrastructure",
         usage:"🏟️ Infrastructure",
@@ -129,7 +129,7 @@ export const recentProjects = [
         detail2:"System Type",
         detail3:"Advanced",
         detail4:"Monitoring",
-        picture:"/city-walk-dubai-retail-electrical.jpg"
+        picture:"/city-walk-dubai.jpg"
     },
     {
         id:12,
@@ -141,7 +141,7 @@ export const recentProjects = [
         detail2:"System Type",
         detail3:"Advanced",
         detail4:"Monitoring",
-        picture:"/salik-dubai-toll-system.jpg"
+        picture:"/salik-dubai.jpg"
     },
 
 ]

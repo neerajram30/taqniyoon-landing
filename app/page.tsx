@@ -28,6 +28,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Head from "next/head";
 import { recentProjects } from "@/components/util/recentProjects";
+import { trustedCompanies } from "@/components/util/trustedCompanies";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -380,6 +381,42 @@ export default function HomePage() {
               </div>
             </motion.div>
           </motion.a>
+        </section>
+
+        <section
+          id="trusted"
+          // className="py-24 bg-gradient-to-br from-[#F8FAFF] to-[#F0F6FF] relative overflow-hidden"
+          className="relative overflow-hidden bg-[#0C0C0C] pt-10"
+        >
+          <motion.h2
+            variants={fadeInUp}
+            className="text-center text-lg lg:text-xl font-bold mb-6 font-[family-name:var(--font-space-grotesk)] text-white"
+          >
+            Trusted By
+          </motion.h2>
+
+          <div className="flex justify-center w-full">
+            <div className="flex w-10/12 flex-wrap justify-around">
+              {trustedCompanies.map((item) => {
+                return (
+                  <motion.div
+                    variants={scaleIn}
+                    className="w-24 h-24 rounded-2xl flex items-center justify-center"
+                    key={item.alt}
+                    title={item.alt}
+                  >
+                    <Image
+                      src={item.logo}
+                      alt={item.alt}
+                      width={100}
+                      height={100}
+                      className="w-24 h-24 object-contain"
+                    />
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
         </section>
 
         {/* Services Section */}

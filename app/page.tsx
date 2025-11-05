@@ -27,6 +27,7 @@ import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Image from "next/image";
 import Head from "next/head";
+import { recentProjects } from "@/components/util/recentProjects";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -118,7 +119,7 @@ export default function HomePage() {
                 { href: "#services", label: "Services" },
                 { href: "#about", label: "About" },
                 { href: "#projects", label: "Projects" },
-                { href: "#contact", label: "Contact" }
+                { href: "#contact", label: "Contact" },
               ].map((item) => (
                 <motion.a
                   key={item.href}
@@ -133,7 +134,7 @@ export default function HomePage() {
             </nav>
 
             <div className="flex items-center space-x-4">
-             <motion.div
+              <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="hidden lg:block"
@@ -151,12 +152,21 @@ export default function HomePage() {
                 className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors text-white"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                    d={
+                      mobileMenuOpen
+                        ? "M6 18L18 6M6 6l12 12"
+                        : "M4 6h16M4 12h16M4 18h16"
+                    }
                   />
                 </svg>
               </button>
@@ -177,7 +187,7 @@ export default function HomePage() {
                     { href: "#services", label: "Services" },
                     { href: "#about", label: "About" },
                     { href: "#projects", label: "Projects" },
-                    { href: "#contact", label: "Contact" }
+                    { href: "#contact", label: "Contact" },
                   ].map((item) => (
                     <motion.a
                       key={item.href}
@@ -316,8 +326,8 @@ export default function HomePage() {
                 {[
                   { number: "6000A", label: "Max Panel Capacity" },
                   { number: "32+", label: "Generators Controlled" },
-                  { number: "100+", label: "Projects Completed" },
-                  { number: "15+", label: "Years Experience" }
+                  { number: "200+", label: "Projects Completed" },
+                  { number: "30+", label: "Years Experience" },
                 ].map((stat, index) => (
                   <motion.div
                     key={index}
@@ -354,7 +364,9 @@ export default function HomePage() {
               }}
               className="flex flex-col items-center text-white/80 hover:text-white transition-colors cursor-pointer"
             >
-              <span className="text-sm mb-2 font-medium">Scroll to explore</span>
+              <span className="text-sm mb-2 font-medium">
+                Scroll to explore
+              </span>
               <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
                 <motion.div
                   animate={{ y: [0, 12, 0] }}
@@ -371,9 +383,10 @@ export default function HomePage() {
         </section>
 
         {/* Services Section */}
-        <section id="services" 
-        // className="py-24 bg-gradient-to-br from-[#F8FAFF] to-[#F0F6FF] relative overflow-hidden"
-        className="py-24 relative overflow-hidden bg-[#0C0C0C]"
+        <section
+          id="services"
+          // className="py-24 bg-gradient-to-br from-[#F8FAFF] to-[#F0F6FF] relative overflow-hidden"
+          className="py-24 relative overflow-hidden bg-[#0C0C0C]"
         >
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
@@ -410,8 +423,9 @@ export default function HomePage() {
                 variants={fadeInUp}
                 className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
               >
-                Comprehensive electrical solutions designed for industrial excellence,
-                delivering cutting-edge technology and unmatched reliability
+                Comprehensive electrical solutions designed for industrial
+                excellence, delivering cutting-edge technology and unmatched
+                reliability
               </motion.p>
             </motion.div>
 
@@ -452,7 +466,7 @@ export default function HomePage() {
                       {[
                         "Switchgear panels up to 6000A",
                         "Motor Control Centers (MCCs)",
-                        "VFDs and soft starters"
+                        "VFDs and soft starters",
                       ].map((item, index) => (
                         <motion.li
                           key={index}
@@ -502,7 +516,7 @@ export default function HomePage() {
                       {[
                         "PLC-based automation",
                         "Control and automation panels",
-                        "Custom control schemes"
+                        "Custom control schemes",
                       ].map((item, index) => (
                         <motion.li
                           key={index}
@@ -552,7 +566,7 @@ export default function HomePage() {
                       {[
                         "Generator synchronization",
                         "ATS panels up to 3200A",
-                        "Capacitor banks"
+                        "Capacitor banks",
                       ].map((item, index) => (
                         <motion.li
                           key={index}
@@ -602,7 +616,7 @@ export default function HomePage() {
                       {[
                         "System modernization",
                         "Energy efficiency upgrades",
-                        "Safety compliance"
+                        "Safety compliance",
                       ].map((item, index) => (
                         <motion.li
                           key={index}
@@ -652,7 +666,7 @@ export default function HomePage() {
                       {[
                         "Custom design solutions",
                         "Specialized applications",
-                        "Unique requirements"
+                        "Unique requirements",
                       ].map((item, index) => (
                         <motion.li
                           key={index}
@@ -702,7 +716,7 @@ export default function HomePage() {
                       {[
                         "Power factor correction",
                         "Energy cost reduction",
-                        "System efficiency"
+                        "System efficiency",
                       ].map((item, index) => (
                         <motion.li
                           key={index}
@@ -726,7 +740,10 @@ export default function HomePage() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="py-24 bg-[#000000] relative overflow-hidden">
+        <section
+          id="about"
+          className="py-24 bg-[#000000] relative overflow-hidden"
+        >
           {/* Background Elements */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-32 right-32 w-40 h-40 border border-accent rotate-45"></div>
@@ -759,8 +776,8 @@ export default function HomePage() {
 
                 <div className="space-y-6">
                   <p className="text-xl text-muted-foreground leading-relaxed">
-                    TAQNIYOON Technical Services Co. LLC has established itself as
-                    a premier provider of electrical solutions in the UAE and
+                    TAQNIYOON Technical Services Co. LLC has established itself
+                    as a premier provider of electrical solutions in the UAE and
                     Middle East region. We specialize in manufacturing and
                     supplying high-quality electrical panels and automation
                     systems.
@@ -777,10 +794,18 @@ export default function HomePage() {
                 {/* Enhanced Statistics */}
                 <div className="grid grid-cols-2 gap-8 pt-8">
                   {[
-                    { number: "6000A", label: "Maximum panel capacity", icon: "⚡" },
-                    { number: "32+", label: "Generators controlled", icon: "🔧" },
-                    { number: "100+", label: "Projects completed", icon: "🏗️" },
-                    { number: "15+", label: "Years of experience", icon: "📅" }
+                    {
+                      number: "6000A",
+                      label: "Maximum panel capacity",
+                      icon: "⚡",
+                    },
+                    {
+                      number: "32+",
+                      label: "Generators controlled",
+                      icon: "🔧",
+                    },
+                    { number: "200+", label: "Projects completed", icon: "🏗️" },
+                    { number: "30+", label: "Years of experience", icon: "📅" },
                   ].map((stat, index) => (
                     <motion.div
                       key={index}
@@ -844,10 +869,11 @@ export default function HomePage() {
           </div>
         </section>
 
-        
-
         {/* Projects Section */}
-        <section id="projects" className="py-24 bg-[#0C0C0C] relative overflow-hidden">
+        <section
+          id="projects"
+          className="py-24 bg-[#0C0C0C] relative overflow-hidden"
+        >
           {/* Background Elements */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-32 right-32 w-40 h-40 border border-accent rotate-45"></div>
@@ -882,8 +908,8 @@ export default function HomePage() {
                 variants={fadeInUp}
                 className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
               >
-                Trusted by leading companies across various industries, delivering
-                excellence in every project we undertake
+                Trusted by leading companies across various industries,
+                delivering excellence in every project we undertake
               </motion.p>
             </motion.div>
 
@@ -893,85 +919,81 @@ export default function HomePage() {
               animate={projectsInView ? "animate" : "initial"}
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
             >
-              <motion.div variants={scaleIn}>
-                <div className="bg-white/5 backdrop-blur-sm border border-white/10 group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
-                  {/* Image Section with Overlay */}
-                  <div className="relative h-72 overflow-hidden">
-                    <img
-                      src="/yacht-marine-electrical-vfd-control-panel-installa.png"
-                      alt="Marine VFD installation"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+              {recentProjects.map((item) => {
+                return (
+                  <motion.div variants={scaleIn} key={item.id + item.title}>
+                    <div className="bg-white/5 backdrop-blur-sm border border-white/10 group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
+                      <div className="relative h-72 overflow-hidden">
+                        <img
+                          src={item.picture}
+                          alt="Marine VFD installation"
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-                    {/* Project Category Badge */}
-                    <div className="absolute top-6 left-6">
-                      <span className="bg-gradient-to-r from-accent to-accent/80 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg backdrop-blur-sm">
-                        🚢 Marine Industry
-                      </span>
-                    </div>
-
-
-
-                    {/* Project Title Overlay */}
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="text-white font-bold text-xl mb-2 font-[family-name:var(--font-space-grotesk)]">
-                        SEA SAN Marine Services
-                      </h3>
-                      <p className="text-white/90 text-sm font-medium">
-                        VFD Panel for Yacht Applications
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Content Section */}
-                  <div className="p-8">
-                    <div className="space-y-4">
-                      <p className="text-muted-foreground leading-relaxed">
-                        Supply and programming of Schneider 7.5KW, single-phase VFD for marine applications with advanced control systems and monitoring capabilities.
-                      </p>
-
-                      {/* Technical Specs */}
-                      <div className="grid grid-cols-2 gap-4 py-4">
-                        <div className="text-center p-3 bg-accent/5 rounded-xl">
-                          <div className="font-bold text-accent text-lg">7.5KW</div>
-                          <div className="text-xs text-muted-foreground">Power Rating</div>
+                        <div className="absolute top-6 left-6">
+                          <span className="bg-gradient-to-r from-accent to-accent/80 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg backdrop-blur-sm">
+                            {item.usage}
+                          </span>
                         </div>
-                        <div className="text-center p-3 bg-accent/5 rounded-xl">
-                          <div className="font-bold text-accent text-lg">Single Phase</div>
-                          <div className="text-xs text-muted-foreground">Configuration</div>
+
+                        <div className="absolute bottom-6 left-6 right-6">
+                          <h3 className="text-white font-bold text-xl mb-2 font-[family-name:var(--font-space-grotesk)]">
+                            {item.title}
+                          </h3>
+                          <p className="text-white/90 text-sm font-medium">
+                            {item.subtitle}
+                          </p>
                         </div>
                       </div>
 
+                      <div className="p-8">
+                        <div className="space-y-4">
+                          <p className="text-muted-foreground leading-relaxed">
+                            {item.description}
+                          </p>
 
+                          <div className="grid grid-cols-2 gap-4 py-4">
+                            <div className="text-center p-3 bg-accent/5 rounded-xl">
+                              <div className="font-bold text-accent text-lg">
+                                {item.detail1}
+                              </div>
+                              <div className="text-xs text-muted-foreground">
+                                {item.detail2}
+                              </div>
+                            </div>
+                            <div className="text-center p-3 bg-accent/5 rounded-xl">
+                              <div className="font-bold text-accent text-lg">
+                                {item.detail3}
+                              </div>
+                              <div className="text-xs text-muted-foreground">
+                                {item.detail4}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </motion.div>
+                  </motion.div>
+                );
+              })}
 
-              <motion.div variants={scaleIn}>
+              {/* <motion.div variants={scaleIn}>
                 <div className="bg-white/5 backdrop-blur-sm border border-white/10 group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
-                  {/* Image Section with Overlay */}
                   <div className="relative h-72 overflow-hidden">
                     <img
                       src="/hotel-automation-control-panel-for-hvac-and-water-.png"
                       alt="Hotel automation system"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-                    {/* Project Category Badge */}
                     <div className="absolute top-6 left-6">
                       <span className="bg-gradient-to-r from-accent to-accent/80 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg backdrop-blur-sm">
                         🏨 Hospitality
                       </span>
                     </div>
 
-
-
-                    {/* Project Title Overlay */}
                     <div className="absolute bottom-6 left-6 right-6">
                       <h3 className="text-white font-bold text-xl mb-2 font-[family-name:var(--font-space-grotesk)]">
                         Al Khoory Hotels
@@ -982,26 +1004,32 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* Content Section */}
                   <div className="p-8">
                     <div className="space-y-4">
                       <p className="text-muted-foreground leading-relaxed">
-                        VFD panels for hot water systems and biology unit automation panels with smart control integration and energy management.
+                        VFD panels for hot water systems and biology unit
+                        automation panels with smart control integration and
+                        energy management.
                       </p>
 
-                      {/* Technical Specs */}
                       <div className="grid grid-cols-2 gap-4 py-4">
                         <div className="text-center p-3 bg-accent/5 rounded-xl">
-                          <div className="font-bold text-accent text-lg">HVAC</div>
-                          <div className="text-xs text-muted-foreground">Control System</div>
+                          <div className="font-bold text-accent text-lg">
+                            HVAC
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            Control System
+                          </div>
                         </div>
                         <div className="text-center p-3 bg-accent/5 rounded-xl">
-                          <div className="font-bold text-accent text-lg">Smart</div>
-                          <div className="text-xs text-muted-foreground">Integration</div>
+                          <div className="font-bold text-accent text-lg">
+                            Smart
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            Integration
+                          </div>
                         </div>
                       </div>
-
-
                     </div>
                   </div>
                 </div>
@@ -1009,26 +1037,20 @@ export default function HomePage() {
 
               <motion.div variants={scaleIn}>
                 <div className="bg-white/5 backdrop-blur-sm border border-white/10 group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
-                  {/* Image Section with Overlay */}
                   <div className="relative h-72 overflow-hidden">
                     <img
                       src="/industrial-electrical-control-panels-and-automatio.png"
                       alt="Stadium power distribution"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-                    {/* Project Category Badge */}
                     <div className="absolute top-6 left-6">
                       <span className="bg-gradient-to-r from-accent to-accent/80 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg backdrop-blur-sm">
                         🏟️ Infrastructure
                       </span>
                     </div>
 
-
-
-                    {/* Project Title Overlay */}
                     <div className="absolute bottom-6 left-6 right-6">
                       <h3 className="text-white font-bold text-xl mb-2 font-[family-name:var(--font-space-grotesk)]">
                         Stadium Project
@@ -1039,40 +1061,42 @@ export default function HomePage() {
                     </div>
                   </div>
 
-                  {/* Content Section */}
                   <div className="p-8">
                     <div className="space-y-4">
                       <p className="text-muted-foreground leading-relaxed">
-                        Supply of DB-PMAX systems for major stadium infrastructure project with advanced monitoring capabilities and load management.
+                        Supply of DB-PMAX systems for major stadium
+                        infrastructure project with advanced monitoring
+                        capabilities and load management.
                       </p>
 
-                      {/* Technical Specs */}
                       <div className="grid grid-cols-2 gap-4 py-4">
                         <div className="text-center p-3 bg-accent/5 rounded-xl">
-                          <div className="font-bold text-accent text-lg">DB-PMAX</div>
-                          <div className="text-xs text-muted-foreground">System Type</div>
+                          <div className="font-bold text-accent text-lg">
+                            DB-PMAX
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            System Type
+                          </div>
                         </div>
                         <div className="text-center p-3 bg-accent/5 rounded-xl">
-                          <div className="font-bold text-accent text-lg">Advanced</div>
-                          <div className="text-xs text-muted-foreground">Monitoring</div>
+                          <div className="font-bold text-accent text-lg">
+                            Advanced
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            Monitoring
+                          </div>
                         </div>
                       </div>
-
-
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </motion.div> */}
             </motion.div>
           </div>
         </section>
 
-
         {/* Industries Section */}
-        <section 
-        className="py-24 bg-[#000000] relative overflow-hidden"
-        
-        >
+        <section className="py-24 bg-[#000000] relative overflow-hidden">
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-20 left-20 w-32 h-32 border border-accent rotate-45"></div>
@@ -1125,26 +1149,26 @@ export default function HomePage() {
                   icon: "/oil-and-gas-industry-icon.png",
                   title: "Oil & Gas",
                   description: "Offshore and onshore electrical solutions",
-                  color: "from-blue-500 to-blue-600"
+                  color: "from-blue-500 to-blue-600",
                 },
                 {
                   icon: "/construction-industry-icon.png",
                   title: "Construction",
                   description: "Temporary and permanent power solutions",
-                  color: "from-orange-500 to-orange-600"
+                  color: "from-orange-500 to-orange-600",
                 },
                 {
                   icon: "/manufacturing-industry-icon.png",
                   title: "Manufacturing",
                   description: "Industrial automation and control systems",
-                  color: "from-green-500 to-green-600"
+                  color: "from-green-500 to-green-600",
                 },
                 {
                   icon: "/marine-industry-icon.png",
                   title: "Marine",
                   description: "Provide Yacht and marine electrical systems",
-                  color: "from-cyan-500 to-cyan-600"
-                }
+                  color: "from-cyan-500 to-cyan-600",
+                },
               ].map((industry, index) => (
                 <motion.div
                   key={index}
@@ -1153,7 +1177,9 @@ export default function HomePage() {
                 >
                   <div className="bg-white/5 backdrop-blur-sm border border-white/10  rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 relative overflow-hidden">
                     {/* Gradient Background Effect */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${industry.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+                    <div
+                      className={`absolute inset-0 bg-gradient-to-br ${industry.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+                    ></div>
 
                     <div className="relative z-10">
                       <div className="w-24 h-24 bg-gradient-to-br from-accent/10 to-accent/20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg">
@@ -1202,7 +1228,10 @@ export default function HomePage() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-24 bg-[#0C0C0C] relative overflow-hidden">
+        <section
+          id="contact"
+          className="py-24 bg-[#0C0C0C] relative overflow-hidden"
+        >
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute top-20 left-20 w-32 h-32 border border-accent rotate-45"></div>
@@ -1239,8 +1268,8 @@ export default function HomePage() {
                   variants={fadeInUp}
                   className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed"
                 >
-                  Ready to discuss your electrical project requirements?
-                  Let's build something extraordinary together
+                  Ready to discuss your electrical project requirements? Let's
+                  build something extraordinary together
                 </motion.p>
               </motion.div>
 
@@ -1326,7 +1355,10 @@ export default function HomePage() {
                 </div>
 
                 {/* Company Image */}
-                <motion.div variants={fadeInUp} className="relative overflow-hidden rounded-3xl shadow-2xl group">
+                <motion.div
+                  variants={fadeInUp}
+                  className="relative overflow-hidden rounded-3xl shadow-2xl group"
+                >
                   <img
                     src="/industrial-electrical-panel-control-room-with-mode.png"
                     alt="TAQNIYOON Technical Services - Professional electrical solutions"
@@ -1343,7 +1375,6 @@ export default function HomePage() {
                   </div>
                 </motion.div>
               </motion.div>
-
             </div>
           </div>
         </section>
@@ -1385,13 +1416,15 @@ export default function HomePage() {
                     <h3 className="font-bold text-xl font-[family-name:var(--font-space-grotesk)]">
                       TAQNIYOON
                     </h3>
-                    <p className="text-sm text-white/70">Technical Services Co. LLC</p>
+                    <p className="text-sm text-white/70">
+                      Technical Services Co. LLC
+                    </p>
                   </div>
                 </motion.div>
 
                 <p className="text-white/80 leading-relaxed mb-6">
                   Leading provider of industrial electrical solutions in the UAE
-                  and Middle East, delivering excellence since 2009.
+                  and Middle East, delivering excellence since 2024.
                 </p>
 
                 {/* Contact Info */}
@@ -1423,7 +1456,7 @@ export default function HomePage() {
                     "Power Management",
                     "Electrical Retrofitting",
                     "Special Purpose Panels",
-                    "Capacitor Banks"
+                    "Capacitor Banks",
                   ].map((service, index) => (
                     <li key={index}>
                       <a
@@ -1450,7 +1483,7 @@ export default function HomePage() {
                     "Manufacturing",
                     "Marine",
                     "Infrastructure",
-                    "Hospitality"
+                    "Hospitality",
                   ].map((industry, index) => (
                     <li key={index}>
                       <a
@@ -1475,7 +1508,7 @@ export default function HomePage() {
                     { label: "About Us", href: "#about" },
                     { label: "Projects", href: "#projects" },
                     { label: "Contact", href: "#contact" },
-                    { label: "Careers", href: "#" }
+                    { label: "Careers", href: "#" },
                   ].map((link, index) => (
                     <li key={index}>
                       <a
@@ -1491,7 +1524,9 @@ export default function HomePage() {
 
                 {/* Certifications */}
                 <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
-                  <h5 className="font-semibold text-sm mb-3 text-accent">Certifications</h5>
+                  <h5 className="font-semibold text-sm mb-3 text-accent">
+                    Certifications
+                  </h5>
                   <div className="space-y-2 text-xs text-white/70">
                     <p>✓ ISO 9001:2015 Certified</p>
                     <p>✓ UAE Trade License</p>
@@ -1505,12 +1540,23 @@ export default function HomePage() {
             <div className="border-t border-white/10 mt-12 pt-8">
               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                 <p className="text-sm text-white/60">
-                  © 2025 TAQNIYOON Technical Services Co. LLC. All rights reserved.
+                  © 2025 TAQNIYOON Technical Services Co. LLC. All rights
+                  reserved.
                 </p>
 
                 <div className="flex items-center gap-6 text-sm text-white/60">
-                  <a href="#" className="hover:text-accent transition-colors duration-300">Privacy Policy</a>
-                  <a href="#" className="hover:text-accent transition-colors duration-300">Terms of Service</a>
+                  <a
+                    href="#"
+                    className="hover:text-accent transition-colors duration-300"
+                  >
+                    Privacy Policy
+                  </a>
+                  <a
+                    href="#"
+                    className="hover:text-accent transition-colors duration-300"
+                  >
+                    Terms of Service
+                  </a>
                   {/* <a href="#" className="hover:text-accent transition-colors duration-300">Sitemap</a> */}
                 </div>
               </div>

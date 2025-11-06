@@ -21,6 +21,7 @@ import {
   Factory,
   Cpu,
   Power,
+  BriefcaseBusiness
 } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "framer-motion";
@@ -396,7 +397,7 @@ export default function HomePage() {
           </motion.h2>
 
           <div className="flex justify-center w-full">
-            <div className="flex w-10/12 flex-wrap justify-around">
+            <div className="flex w-10/12 flex-wrap justify-around gap-4">
               {trustedCompanies.map((item) => {
                 return (
                   <motion.div
@@ -485,7 +486,7 @@ export default function HomePage() {
                       Industrial Panels
                     </CardTitle>
                     <CardDescription className="text-base leading-relaxed">
-                      L V panels up to 6000A, MCCs with VFDs, soft starters, and
+                      LV panels up to 6000A, MCCs with VFDs, soft starters, and
                       conventional starters for industrial projects
                     </CardDescription>
                   </CardHeader>
@@ -968,11 +969,11 @@ export default function HomePage() {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
 
-                        <div className="absolute top-6 left-6">
+                        {/* <div className="absolute top-6 left-6">
                           <span className="bg-gradient-to-r from-accent to-accent/80 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg backdrop-blur-sm">
                             {item.usage}
                           </span>
-                        </div>
+                        </div> */}
 
                         <div className="absolute bottom-6 left-6 right-6">
                           <h3 className="text-white font-bold text-xl mb-2 font-[family-name:var(--font-space-grotesk)]">
@@ -999,14 +1000,14 @@ export default function HomePage() {
                                 {item.detail2}
                               </div>
                             </div>
-                            <div className="text-center p-3 bg-accent/5 rounded-xl">
+                            {/* <div className="text-center p-3 bg-accent/5 rounded-xl">
                               <div className="font-bold text-accent text-lg">
                                 {item.detail3}
                               </div>
                               <div className="text-xs text-muted-foreground">
                                 {item.detail4}
                               </div>
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       </div>
@@ -1315,9 +1316,9 @@ export default function HomePage() {
                 initial="initial"
                 whileInView="animate"
                 viewport={{ once: true, margin: "-100px" }}
-                className="max-w-5xl mx-auto"
+                className="max-w-7xl mx-auto"
               >
-                <div className="grid lg:grid-cols-3 gap-8 mb-16">
+                <div className="grid lg:grid-cols-4 gap-4 mb-16">
                   {/* Phone Contact */}
                   <motion.div variants={fadeInUp}>
                     <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10  p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center group h-full flex flex-col">
@@ -1365,7 +1366,7 @@ export default function HomePage() {
                         </a>
                       </div>
                       <p className="text-sm text-gray-400 mt-4">
-                        We respond within 24 hours
+                        Our experts will respond within 24 hours
                       </p>
                     </div>
                   </motion.div>
@@ -1385,7 +1386,26 @@ export default function HomePage() {
                         </p>
                       </div>
                       <p className="text-sm text-gray-400 mt-4">
-                        Serving across the Gulf region
+                        Serving across the Middle East region
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  <motion.div variants={fadeInUp}>
+                    <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10  p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center group h-full flex flex-col">
+                      <div className="w-16 h-16 bg-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <BriefcaseBusiness className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-lg font-bold mb-4 text-white">
+                        Join Us
+                      </h3>
+                      <div className="flex-grow">
+                        <p className="text-accent hover:text-accent/80 font-semibold mb-2">
+                         info@taqniyoon.com
+                        </p>
+                      </div>
+                      <p className="text-sm text-gray-400 mt-4">
+                        Ready to join us? Email your resume to our team
                       </p>
                     </div>
                   </motion.div>
@@ -1545,7 +1565,7 @@ export default function HomePage() {
                     { label: "About Us", href: "#about" },
                     { label: "Projects", href: "#projects" },
                     { label: "Contact", href: "#contact" },
-                    { label: "Careers", href: "#" },
+                    { label: "Careers", href: "#contact" },
                   ].map((link, index) => (
                     <li key={index}>
                       <a

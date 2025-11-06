@@ -53,5 +53,30 @@ export const trustedCompanies = [
         id:11,
         logo:"/amet-vector-logo.png",
         alt:"Al Muthabra Equipment Trading LLC"
+    },
+    {
+        id:12,
+        logo:"/alkhoory.webp",
+        alt:"Al Khoory"
+    },
+    {
+        id:13,
+        logo:"/ikea.svg",
+        alt:"IKEA"
+    },
+    {
+        id:14,
+        logo:"/desert-landscape.png",
+        alt:"Desert Land Scape"
+    },
+    {
+        id:15,
+        logo:"/balmer.jpeg",
+        alt:"Balmer Lawrine & Co Ltd"
+    },
+    {
+        id:16,
+        logo:"/quantum.svg",
+        alt:"Quantum Industries"
     }
 ] 

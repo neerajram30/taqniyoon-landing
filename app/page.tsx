@@ -30,6 +30,7 @@ import Image from "next/image";
 import Head from "next/head";
 import { recentProjects } from "@/components/util/recentProjects";
 import { trustedCompanies } from "@/components/util/trustedCompanies";
+import Loading from "./loading";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -258,6 +259,7 @@ export default function HomePage() {
                 >
                   ⚡ Trusted by Leading Industries Across the Middle East
                 </Badge>
+                
               </motion.div>
 
               {/* Enhanced Typography Hierarchy */}
@@ -906,8 +908,7 @@ export default function HomePage() {
             </motion.div>
           </div>
         </section>
-
-        {/* Projects Section */}
+                  
         <section
           id="projects"
           className="py-24 bg-[#0C0C0C] relative overflow-hidden"
@@ -1000,14 +1001,6 @@ export default function HomePage() {
                                 {item.detail2}
                               </div>
                             </div>
-                            {/* <div className="text-center p-3 bg-accent/5 rounded-xl">
-                              <div className="font-bold text-accent text-lg">
-                                {item.detail3}
-                              </div>
-                              <div className="text-xs text-muted-foreground">
-                                {item.detail4}
-                              </div>
-                            </div> */}
                           </div>
                         </div>
                       </div>
@@ -1015,123 +1008,10 @@ export default function HomePage() {
                   </motion.div>
                 );
               })}
-
-              {/* <motion.div variants={scaleIn}>
-                <div className="bg-white/5 backdrop-blur-sm border border-white/10 group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
-                  <div className="relative h-72 overflow-hidden">
-                    <img
-                      src="/hotel-automation-control-panel-for-hvac-and-water-.png"
-                      alt="Hotel automation system"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-
-                    <div className="absolute top-6 left-6">
-                      <span className="bg-gradient-to-r from-accent to-accent/80 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg backdrop-blur-sm">
-                        🏨 Hospitality
-                      </span>
-                    </div>
-
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="text-white font-bold text-xl mb-2 font-[family-name:var(--font-space-grotesk)]">
-                        Al Khoory Hotels
-                      </h3>
-                      <p className="text-white/90 text-sm font-medium">
-                        Hotel Automation Systems
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="p-8">
-                    <div className="space-y-4">
-                      <p className="text-muted-foreground leading-relaxed">
-                        VFD panels for hot water systems and biology unit
-                        automation panels with smart control integration and
-                        energy management.
-                      </p>
-
-                      <div className="grid grid-cols-2 gap-4 py-4">
-                        <div className="text-center p-3 bg-accent/5 rounded-xl">
-                          <div className="font-bold text-accent text-lg">
-                            HVAC
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            Control System
-                          </div>
-                        </div>
-                        <div className="text-center p-3 bg-accent/5 rounded-xl">
-                          <div className="font-bold text-accent text-lg">
-                            Smart
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            Integration
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div variants={scaleIn}>
-                <div className="bg-white/5 backdrop-blur-sm border border-white/10 group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-3">
-                  <div className="relative h-72 overflow-hidden">
-                    <img
-                      src="/industrial-electrical-control-panels-and-automatio.png"
-                      alt="Stadium power distribution"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-
-                    <div className="absolute top-6 left-6">
-                      <span className="bg-gradient-to-r from-accent to-accent/80 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg backdrop-blur-sm">
-                        🏟️ Infrastructure
-                      </span>
-                    </div>
-
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="text-white font-bold text-xl mb-2 font-[family-name:var(--font-space-grotesk)]">
-                        Stadium Project
-                      </h3>
-                      <p className="text-white/90 text-sm font-medium">
-                        Power Distribution Systems
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="p-8">
-                    <div className="space-y-4">
-                      <p className="text-muted-foreground leading-relaxed">
-                        Supply of DB-PMAX systems for major stadium
-                        infrastructure project with advanced monitoring
-                        capabilities and load management.
-                      </p>
-
-                      <div className="grid grid-cols-2 gap-4 py-4">
-                        <div className="text-center p-3 bg-accent/5 rounded-xl">
-                          <div className="font-bold text-accent text-lg">
-                            DB-PMAX
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            System Type
-                          </div>
-                        </div>
-                        <div className="text-center p-3 bg-accent/5 rounded-xl">
-                          <div className="font-bold text-accent text-lg">
-                            Advanced
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            Monitoring
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div> */}
             </motion.div>
           </div>
         </section>
+
 
         {/* Industries Section */}
         <section className="py-24 bg-[#000000] relative overflow-hidden">

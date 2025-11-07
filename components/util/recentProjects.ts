@@ -41,8 +41,8 @@ export const recentProjects = [
         subtitle:"Irrigation Control Panel",
         description:"Irrigation Control Panel Systems and Power Distribution Solutions",
         usage:"🏟️ Infrastructure",
-        detail1:"135 kW & 95 Kw",
-        detail2:"MCC Panels",
+        detail1:"135 KW & 95 KW",
+        detail2:"Irrigation Panels",
         detail3:"Advanced",
         detail4:"Monitoring",
         picture:"/sharjah-municipality-electrical-project.jpg"
@@ -53,7 +53,7 @@ export const recentProjects = [
         subtitle:"Park Electrical Systems",
         description:"Lighting control panels and automation systems for outdoor park infrastructure",
         usage:"🏟️ Infrastructure",
-        detail1:"135 kW & 95 Kw",
+        detail1:"135 KW & 95 KW",
         detail2:"MCC Panels",
         detail3:"Advanced",
         detail4:"Monitoring",
@@ -102,7 +102,7 @@ export const recentProjects = [
         description:"Large-scale electrical distribution and control systems for commercial mall operations",
         usage:"🏟️ Infrastructure",
         detail1:"LV Panel",
-        detail2:"Installation",
+        detail2:"Supply & Installation",
         detail3:"Advanced",
         detail4:"Monitoring",
         picture:"/wafi-mall-dubai-electrical.jpg"
@@ -114,7 +114,7 @@ export const recentProjects = [
         description:"Custom industrial electrical panels and control systems for manufacturing operations",
         usage:"🏟️ Infrastructure",
         detail1:"DB-PMAX",
-        detail2:"System Type",
+        detail2:"Irrigation Panel",
         detail3:"Advanced",
         detail4:"Monitoring",
         picture:"/dutco-tennant-industrial-project.jpg"
@@ -137,8 +137,8 @@ export const recentProjects = [
         subtitle:"Toll System Infrastructure",
         description:"Critical electrical systems and automation panels for toll collection infrastructure",
         usage:"🏟️ Infrastructure",
-        detail1:"ATS Panel",
-        detail2:"Installation",
+        detail1:"PLC-based",
+        detail2:"ATS Panel",
         detail3:"Advanced",
         detail4:"Monitoring",
         picture:"/salik-dubai.jpg"

@@ -40,7 +40,7 @@ export const recentProjects = [
         title:"Sharjah Municipality",
         subtitle:"Irrigation Control Panel",
         description:"Irrigation Control Panel Systems and Power Distribution Solutions",
-        usage:"🏟️ Infrastructure",
+        usage:"🏟️ Infrastructures",
         detail1:"135 KW & 95 KW",
         detail2:"Irrigation Panels",
         detail3:"Advanced",
